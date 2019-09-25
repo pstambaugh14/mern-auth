@@ -24,5 +24,15 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "validator": "^10.9.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pstambaugh14/mern-auth.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/pstambaugh14/mern-auth/issues"
+  },
+  "homepage": "https://github.com/pstambaugh14/mern-auth#readme"
 }
