@@ -25,6 +25,7 @@ pipeline {
         stage('Initialize') {
           steps {
               echo "${appName}"
+              echo "${WORKSPACE}"
   }
 }
         stage('Build') {
