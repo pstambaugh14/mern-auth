@@ -6,7 +6,7 @@ services:
       container_name: mern-auth
       volumes:
 #        - "config-dir./config:/var/lib/jenkins/workspace/mern_docker/config"
-        - "/var/lib/jenkins/workspace/mern-auth-clean/config:/var/lib/jenkins/workspace/mern-auth-clean/config"
+        - "/home/patrick/config:/var/lib/jenkins/workspace/mern-auth-clean/config"
       ports:
         - "5000:5000"
         - "3000:3000"
