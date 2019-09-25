@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+    mern-auth:
+    env_file:
+      - .env
+      build: .
+      image: mern-auth
+      container_name: mern-auth
+      volumes:
+#        - "config-dir./config:/var/lib/jenkins/workspace/mern_docker/config"
+        - "${PWD/config}/config:/var/lib/jenkins/workspace/mern_docker/config"
+      ports:
+        - "5000:5000"
+        - "3000:3000"
+#volumes:
+#    config-dir:
+#        name: ${PWD/config} # Real ending name
+#        external: false

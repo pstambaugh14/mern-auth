@@ -1,0 +1,127 @@
+---
+apiVersion: v1
+#apiVersion: apps/v1beta1
+#kind: Deployment
+kind: Pod
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: mern-auth
+  namespace: development
+  labels:
+    app: mern-auth
+spec:
+  hostname: mern-auth
+  subdomain: default-subdomain
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: mern-auth
+#  template:
+#    metadata:
+#      labels:
+#        app: mern-auth
+#    spec:
+  dnsPolicy: Default
+  volumes:
+  - name: task-pv-storage
+    persistentVolumeClaim:
+      claimName: task-pv-claim
+#  - name: data2
+#    persistentVolumeClaim:
+#      claimName: data-claim2
+  containers:
+    - name: mern-auth
+      #imagePullPolicy: IfNotPresent
+      imagePullPolicy: Always
+      image: pstambaugh14/mern-auth-jenks-k8s
+      ports:
+        - containerPort: 3000
+          name: "frontend"
+        - containerPort: 5000
+          name: "backend"
+      volumeMounts:
+        - mountPath: "/var/lib/jenkins/workspace/mern_docker/config"
+          name: task-pv-storage
+#    - name: mongodb-container
+#      imagePullPolicy: Always
+#      image: mongo:4.2.0
+#      command: mongodb
+#      volumeMounts:
+#        - mountPath: /var/lib/mongo
+#          name: data2
+#      ports:
+#      - containerPort: 27017
+#        name: mongodbport
+#      env:
+#      - name: URI
+#        valueFrom:
+#          configMapKeyRef:
+#            name: nodejs-configmaps
+#            key: URI
+
+#---
+#kind: StatefulSet
+#metadata:
+#  name: mongo-stateful
+#  namespace: development
+#spec:
+#  selector:
+#    matchLabels:
+#      app: mern-auth
+#  serviceName: "mongo-service"
+#  replicas: 1
+#  template:
+#    metadata:
+#      labels:
+#        app: mern-auth
+#    environment: development
+#    spec:
+#      volumes:
+#        - name: data2
+#          persistentVolumeClaim:
+#            claimName: data-claim2
+#      terminationGracePeriodSeconds: 10
+#      containers:
+#      - name: mongo-stateful
+#        image: mongo
+#        command:
+#          - mongod
+#          - "--replSet"
+#          - rs0
+#          - "--smallfiles"
+#          - "--noprealloc"
+#        ports:
+#        - containerPort: 27017
+#        volumeMounts:
+#          - name: data2
+#            mountPath: /var/lib/mongo
+#        env:
+#          - name: URI
+#            valueFrom:
+#              configMapKeyRef:
+#                name: nodejs-configmaps
+#                key: URI
+#  replicas: 1
+#  template:
+#    metadata:
+#      labels:
+#        apps: mern-auth
+#    spec:
+#Note: key.js need to be added to /mnt/data directory on minikube host for this volume storage method to work
+#      volumes:
+#        - name: task-pv-storage
+#          persistentVolumeClaim:
+#            claimName: task-pv-claim
+#      containers:
+#        - name: mern-auth
+#          imagePullPolicy: IfNotPresent
+#          image: 192.168.0.158:5001/mern-auth:latest
+#          ports:
+#            - containerPort: 3000
+#              name: "frontend"
+#            - containerPort: 5000
+#              name: backend
+#          volumeMounts:
+#            - mountPath: "/var/lib/jenkins/workspace/mern_docker/config"
+#              name: task-pv-storage
