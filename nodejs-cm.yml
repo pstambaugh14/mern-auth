@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nodejs-configmaps
+  namespace: development
+data:
+#  URI: mongodb://mongodb-svc:27017/hello
+#  URI: mongodb://mongo-service-0.mongo-service.default.svc.cluster.local:27017
+#  URI: mongodb://mongo-service:27017/
+  URI: mongodb://mongo
+
+
+#---
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: nodejs-configmaps
+#  namespace: development
+#data:
+#  projectName: mern-auth-jenks-k8s
+#  orgId: <orgId> # Optional
+#  baseUrl: https://<myOpsManagerURL>

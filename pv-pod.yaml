@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mern-auth
+  namespace: development
+spec:
+#  volumes:
+#    - name: task-pv-storage
+#      persistentVolumeClaim:
+#        claimName: task-pv-claim
+  containers:
+    - name: mern-auth
+#      image: pstambaugh14/mern-auth-jenks-k8s_full_stack_app:latest
+      image: pstambaugh14/mern-auth-jenks-k8s
+      ports:
+        - containerPort: 3000
+          name: "frontend"
+        - containerPort: 5000
+          name: backend
+      volumeMounts:
+        - mountPath: "/var/lib/jenkins/workspace/mern_docker/"
+          name: task-pv-volume
+  volumes:
+#    - name: task-pv-volume
+    - name: task-pv-storage
+      hostPath:
+        path: data/config

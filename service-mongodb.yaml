@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-service
+#  labels:
+#    name: mern-auth
+  namespace: development
+  labels:
+    app: mern-auth
+spec:
+  selector:
+    app: mern-auth
+  ports:
+    - port: 27017
+      targetPort: 27017
+      name: mongoport
+  type: ClusterIP
+#  clusterIP: none
+#  selector:
+#    role: mongo
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+ name: mongo-service
+subsets:
+ - addresses:
+     - ip: 10.240.0.4
+   ports:
+     - port: 27017

@@ -1,0 +1,53 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: mongo-stateful
+  namespace: development
+spec:
+  selector:
+    matchLabels:
+      app: mern-auth
+  serviceName: "mongo-service"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mern-auth
+#    environment: development
+    spec:
+      volumes:
+        - name: data2
+          persistentVolumeClaim:
+            claimName: data-claim2
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: mongo-stateful
+        image: mongo
+        command:
+          - mongod
+          - "--replSet"
+          - rs0
+#          - "--smallfiles"
+#          - "--noprealloc"
+        ports:
+        - containerPort: 27017
+        volumeMounts:
+          - name: data2
+            mountPath: /var/lib/mongo
+#        volumeMounts:
+#        - name: data
+#          mountPath: /data/mongoData
+#      - name: mongo-sidecar
+#        image: cvallance/mongo-k8s-sidecar
+#        - name: MONGO\_SIDECAR\_POD\_LABELS
+#          value: "role=mongo", # environment=development"
+#          volumeClaimTemplates:
+#        - metadata:
+#        name: mongo-persistent-storage
+#        annotations:
+#        volume.beta.kubernetes.io/storage-class: "fast"
+#        spec:
+#          accessModes: ["ReadWriteOnce"]
+#          resources:
+#            requests:
+#              storage: 1Gi

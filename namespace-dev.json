@@ -1,0 +1,12 @@
+//Create Namespace Template via minikube dashboard or:
+//kubectl create -f namespace-dev.json
+{
+  "apiVersion": "v1",
+  "kind": "Namespace",
+  "metadata": {
+    "name": "development",
+    "labels": {
+      "name": "development"
+    }
+  }
+}

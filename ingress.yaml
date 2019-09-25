@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mern-auth-ingress
+  namespace: development
+spec:
+  rules:
+  - host: mern-auth.local
+    http:
+      paths:
+#      - path: /mern-auth-service
+      - path: /*
+        backend:
+          serviceName: mern-auth-service
+          servicePort: 3000
