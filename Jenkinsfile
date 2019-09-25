@@ -41,6 +41,8 @@ pipeline {
               sh 'npm run client-install'
               sh 'npm install nodemon'
               sh 'cd client && npm init -y'
+              sh 'cd client && npm install'
+              sh 'cd client && npm install nodemon'
 //              sh 'docker-compose build -d'
 //              sh '"$CUR_DIR_VAR"/fix.sh'
 //              sh 'rm -rf config'
