@@ -30,7 +30,7 @@ pipeline {
         stage('Build') {
             steps {
               echo 'Building..'
-              script
+//              script
 //                docker.build registry + ":$BUILD_NUMBER"
 //              sh '"$CUR_DIR_VAR"/fix.sh'
               sh 'npm install'
