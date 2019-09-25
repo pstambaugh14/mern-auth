@@ -42,7 +42,7 @@ spec:
           name: "backend"
       volumeMounts:
 #        - mountPath: "/var/lib/jenkins/workspace/mern_docker/config"
-        - mountPath: "/var/lib/jenkins/Apps/mern-auth/config"
+        - mountPath: "/var/lib/jenkins/Apps/mern-auth-clean/config"
           name: task-pv-storage
 #    - name: mongodb-container
 #      imagePullPolicy: Always
