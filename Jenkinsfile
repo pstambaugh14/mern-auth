@@ -75,7 +75,7 @@ pipeline {
 //                  sh("sed -i.bak 's#${WORKSPACE}/mern_docker_full_stack_app:${imageVersion}#${imageTag}#' ./*.yaml") //or mern_docker_full_stack_app
                   //Create or update resources
 //                  sh("kubectl --namespace=${namespace} apply -f ./pv-claim.yaml")
-                  sh("kubectl --namespace=${namespace} apply -f ./deployment.yaml")
+                  sh("kubectl --namespace=${namespace} apply -f ./k8s/deploy/deployment.yaml")
 //                  sh("kubectl --namespace=${namespace} apply -f ./service.yaml")
                   //Add or Update pv-pod volume claim and mount
                   //sh("kubectl --namespace=${namespace} apply -f ./pv-pod.yaml")
