@@ -24,8 +24,8 @@ pipeline {
 }
         stage('Initialize') {
           steps {
-              echo "${appName}"
-              echo "${WORKSPACE}"
+              echo "${appName} is the var for appName"
+              echo "${WORKSPACE} is the var for WORKSPACE"
   }
 }
         stage('Build') {
