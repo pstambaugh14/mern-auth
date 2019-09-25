@@ -34,10 +34,10 @@ pipeline {
 //                docker.build registry + ":$BUILD_NUMBER"
 //              sh '"$CUR_DIR_VAR"/fix.sh'
               sh 'npm install'
-              sh 'npm install -g nodemon'
 //              sh 'sleep 5'
 //              sh 'rm -f "$CUR_DIR_VAR"/client/package-lock.json && npm cache clean --force'
               sh 'npm run client-install'
+              sh 'npm install -g nodemon'              
 //              sh 'docker-compose build -d'
 //              sh '"$CUR_DIR_VAR"/fix.sh'
 //              sh 'rm -rf config'
