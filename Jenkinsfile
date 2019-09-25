@@ -11,8 +11,8 @@ pipeline {
   agent any
 //  tools {nodejs "Node.js 10.16.3"}
           environment {
-//            CUR_DIR_VAR = "${WORKSPACE}"
-//            PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/var/lib/jenkins/npm/bin"
+            CUR_DIR_VAR = "${WORKSPACE}"
+            PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/var/lib/jenkins/npm/bin"
             registry = "pstambaugh14/mern-auth-jenks-k8s2"
             registryCredential = 'dockerhub'
             dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
