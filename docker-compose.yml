@@ -1,8 +1,6 @@
 version: '3.3'
 services:
     mern-auth:
-    env_file:
-      - .env
       build: .
       image: mern-auth
       container_name: mern-auth
