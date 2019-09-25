@@ -15,6 +15,7 @@ pipeline {
             PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/var/lib/jenkins/npm/bin"
             registry = "pstambaugh14/mern-auth-jenks-k8s2"
             registryCredential = 'dockerhub'
+            dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
           }
     stages {
       stage('Checkout') {
@@ -24,16 +25,15 @@ pipeline {
         stage('Initialize') {
           steps {
               echo "${appName}"
-
   }
 }
         stage('Build') {
             steps {
               echo 'Building..'
               script
-                docker.build registry + ":$BUILD_NUMBER"
+//                docker.build registry + ":$BUILD_NUMBER"
 //              sh '"$CUR_DIR_VAR"/fix.sh'
-//              sh 'npm install'
+              sh 'npm install'
 //              sh 'sleep 5'
 //              sh 'rm -f "$CUR_DIR_VAR"/client/package-lock.json && npm cache clean --force'
 //              sh 'npm run client-install'
@@ -45,8 +45,25 @@ pipeline {
         }
         stage('Test') {
             steps {
+              sh 'npm test'
                 echo 'Testing..'
             }
+        }
+        stage('Building image') {
+          steps{
+            script {
+              dockerImage = docker.build registry + ":$BUILD_NUMBER"
+            }
+          }
+        }
+        stage('Deploy Image') {
+          steps{
+             script {
+                docker.withRegistry( '', registryCredential ) {
+                dockerImage.push()
+              }
+            }
+          }
         }
  stage('Deploy Application') {
       steps {
@@ -65,6 +82,12 @@ pipeline {
 //                  break
    }
   }
+  stage('Remove Unused docker image') {
+    steps{
+      sh "docker rmi $registry:$BUILD_NUMBER"
+    }
+  }
+}
 }
         post {
           always {
