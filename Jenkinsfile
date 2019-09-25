@@ -9,7 +9,7 @@ def imageTag = "${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 def feSvcName = "mern-auth-service"
 pipeline {
   agent any
-  tools {nodejs "Node.js 10.16.3"}
+//  tools {nodejs "Node.js 10.16.3"}
           environment {
 //            CUR_DIR_VAR = "${WORKSPACE}"
 //            PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/var/lib/jenkins/npm/bin"
@@ -75,7 +75,7 @@ pipeline {
                   //Create or update resources
 //                  sh("kubectl --namespace=${namespace} apply -f ./pv-claim.yaml")
                   sh("kubectl --namespace=${namespace} apply -f ./deployment.yaml")
-                  sh("kubectl --namespace=${namespace} apply -f ./service.yaml")
+//                  sh("kubectl --namespace=${namespace} apply -f ./service.yaml")
                   //Add or Update pv-pod volume claim and mount
                   //sh("kubectl --namespace=${namespace} apply -f ./pv-pod.yaml")
           //Grab the external Ip address of the service
@@ -89,7 +89,6 @@ pipeline {
     }
   }
 }
-
         post {
           always {
             cleanWs()
