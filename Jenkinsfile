@@ -11,8 +11,8 @@ pipeline {
   agent any
   tools {nodejs "Node.js 10.16.3"}
           environment {
-            CUR_DIR_VAR = "${WORKSPACE}"
-            PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/var/lib/jenkins/npm/bin"
+//            CUR_DIR_VAR = "${WORKSPACE}"
+//            PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/var/lib/jenkins/npm/bin"
             registry = "pstambaugh14/mern-auth-jenks-k8s2"
             registryCredential = 'dockerhub'
             dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
@@ -34,10 +34,10 @@ pipeline {
 //                docker.build registry + ":$BUILD_NUMBER"
 //              sh '"$CUR_DIR_VAR"/fix.sh'
               sh 'npm install'
+              sh 'npm install -g nodemon'
 //              sh 'sleep 5'
 //              sh 'rm -f "$CUR_DIR_VAR"/client/package-lock.json && npm cache clean --force'
               sh 'npm run client-install'
-              sh 'npm i -D nodemon'
 //              sh 'docker-compose build -d'
 //              sh '"$CUR_DIR_VAR"/fix.sh'
 //              sh 'rm -rf config'
