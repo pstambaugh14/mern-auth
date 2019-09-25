@@ -10,8 +10,3 @@ spec:
   resources:
     requests:
       storage: 1Gi
-#Create the PersistentVolumeClaim:
-#kubectl apply -f https://k8s.io/examples/pods/storage/pv-claim.yaml
-
-#Look again at the PersistentVolume:
-#kubectl get pv task-pv-volume

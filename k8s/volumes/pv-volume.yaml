@@ -13,9 +13,3 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/data/config"
-#    path: "/mnt/data"
-#Create the PersistentVolume:
-#kubectl apply -f https://k8s.io/examples/pods/storage/pv-volume.yaml
-
-#View information about the PersistentVolume:
-#kubectl get pv task-pv-volume
