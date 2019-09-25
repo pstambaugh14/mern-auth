@@ -5,7 +5,6 @@ services:
       image: mern-auth
       container_name: mern-auth
       volumes:
-#        - "config-dir./config:/var/lib/jenkins/workspace/mern_docker/config"
         - "/home/patrick/config:/var/lib/jenkins/workspace/mern_docker/config"
       ports:
         - "5000:5000"
