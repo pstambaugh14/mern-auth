@@ -58,7 +58,7 @@ pipeline {
         }
         stage('Deploy Application') {
           steps {
-             sh 'kubectl delete pod mern-auth'
+             sh 'pod-check.sh'
              sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")
              //Update the imagetag to the latest version
              sh("sed -i.bak 's#${project}/${appName}:${imageVersion}#${imageTag}#' ./*.yaml")
