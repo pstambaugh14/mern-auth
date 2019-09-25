@@ -43,6 +43,7 @@ pipeline {
               sh 'cd client && npm init -y'
               sh 'cd client && npm install'
               sh 'cd client && npm install nodemon'
+              sh 'npm audit fix'
 //              sh 'docker-compose build -d'
 //              sh '"$CUR_DIR_VAR"/fix.sh'
 //              sh 'rm -rf config'
