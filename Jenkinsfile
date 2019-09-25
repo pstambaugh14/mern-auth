@@ -61,7 +61,7 @@ pipeline {
              sh '"${WORKSPACE}"/pod-check.sh'
              sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")
              //Update the imagetag to the latest version
-             sh("sed -i.bak 's#${project}/${appName}:${imageVersion}#${imageTag}#' ${WORKSPACE}/*.yaml")
+             sh("sed -i.bak 's#${project}/${appName}:${imageVersion}#${imageTag}#' ${WORKSPACE}/k8s/deploy/*.yaml")
              //Create or update resources
              sh("kubectl --namespace=${namespace} apply -f ${WORKSPACE}/k8s/deploy/deployment.yaml")
              //Grab the external Ip address of the service
