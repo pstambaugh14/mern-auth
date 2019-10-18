@@ -19,16 +19,20 @@ app.use(bodyParser.json());
 const db = require("./config/keys").mongoURI;
 
 // Connect to MongoDB
-mongoose
-  .connect(
-    db,
-    { useNewUrlParser: true },
-    { useFindAndModify: false },
-    { useCreateIndex: true },
-    { useUnifiedTopology: true }
+mongoose.connect(db,
+    { useNewUrlParser: true,
+     useFindAndModify: false,
+     useCreateIndex: true,
+     useUnifiedTopology: true }
   )
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));
+
+//Test example for comparison's sake:
+//mongoose.connect('mongodb://localhost:27017/test', {
+//  useMongoClient: true,
+//  connectTimeoutMS: 1000
+//});
 
 // Passport middleware
 app.use(passport.initialize());
