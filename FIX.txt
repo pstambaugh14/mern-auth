@@ -1,0 +1,3 @@
+npm was having an issue with the client portion of the build... to fix this you need to run:
+
+'sudo npm install -g nodemon'
