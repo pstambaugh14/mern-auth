@@ -16,13 +16,15 @@ This project uses the following technologies:
 - [Build a Login/Auth App with the MERN Stack — Part 2 (Frontend & Redux Setup)](https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-2-frontend-6eac4e38ee82)
 - [Build a Login/Auth App with the MERN Stack — Part 3 (Linking Redux with React Components)](https://blog.bitsrc.io/build-a-login-auth-app-with-the-mern-stack-part-3-react-components-88190f8db718)
 
-# MERN-AUTH-DOCKER
+# mern-auth - a Mongodb, Express, React & Node.js authentication application.
+              Other parts of the project do and will have the following features:
+# MERN-AUTH-DOCKER - https://hub.docker.com/repository/docker/pstambaugh14/mern-auth-jenks-k8s2
 
-created by: Patrick Stambaugh
-Dockerized version of MERN-based authentication application.
-This is one of my first projects so please be kind.
-This isn't of much use other than that of practice for myself.
-Either way, I am open to positive or constructive criticism, please no trolls.
+# MERN-AUTH-Ansible - Just added the files used by another project as I will likely be consolidating all repos here.
+
+# MERN-AUTH-Jenkins - Needs re-vamping after patching of security updates - but will be glorious soon enough!
+
+# MERN-AUTH-K8S - Surprisingly ready to go (after a LOT of tinkering that is... lol). :)
 
 
 # Updates
