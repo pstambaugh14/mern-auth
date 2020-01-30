@@ -5,7 +5,7 @@ services:
       image: mern-auth
       container_name: mern-auth
       volumes:
-        - "./config"
+        - "./config:/opt/mern-auth/config"
       ports:
         - "5000:5000"
         - "3000:3000"

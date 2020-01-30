@@ -7,22 +7,44 @@ metadata:
   labels:
     app: mern-auth
 spec:
-  hostname: mern-auth
-  subdomain: default-subdomain
-  dnsPolicy: Default
-  volumes:
-  - name: task-pv-storage
-    persistentVolumeClaim:
-      claimName: task-pv-claim
-  containers:
+    containers:
     - name: mern-auth
       image: pstambaugh14/mern-auth-jenks-k8s2
-      imagePullPolicy: Always
-      ports:
-        - containerPort: 3000
-          name: "frontend"
-        - containerPort: 5000
-          name: "backend"
       volumeMounts:
-        - mountPath: "/var/lib/jenkins/workspace/mern_docker/config"
-          name: task-pv-storage
+      - mountPath: /opt/mern-auth/config/keys.js
+        name: keys-config
+        subPath: keys.js
+    volumes:
+    - name: keys-config
+      configMap:
+        name: keys-config
+
+
+
+#apiVersion: v1
+#kind: Pod
+#metadata:
+#  name: mern-auth
+#  namespace: development
+#  labels: 
+#    app: mern-auth
+#spec:
+#  containers:
+#    - name: mern-auth
+#      image: pstambaugh14/mern-auth-jenks-k8s2
+#      command: [ "/bin/sh", "-c", "ls /etc/config/" ]
+#      volumeMounts:
+#      - name: keys-config
+#        mountPath: /opt/mern-auth/config
+#  volumes:
+#    - name: keys-config
+#      configMap:
+        # Provide the name of the ConfigMap containing the files you want
+        # to add to the container
+#        name: keys-config
+#        items:
+#          - key: keys.js
+#            path: keys.js
+#          - key: passport.js
+#            path: passport.js  
+#  restartPolicy: Never

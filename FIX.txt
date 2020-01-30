@@ -1,3 +1,116 @@
 npm was having an issue with the client portion of the build... to fix this you need to run:
 
 'sudo npm install -g nodemon'
+
+
+---------------------------------------------------------------------------------------------
+
+As for fixes for MiniKube / Kubernetes K8S:
+
+- Pretty much needed to redo entire yaml configs in k8s directory.
+- Switched from Persistent Volume Claim to ConfigMaps for ./config/keys.js configuration module.
+  ***NOTE FOR THE FUTURE: Perfect the ConfigMap to be a bit sexier***
+- The ConfigMaps work fine but I had initial problems with the 'data' symbolic link directory which prevented proper communication between the passport.js module and keys.js.
+  Essentially, both files were sitting in a virtual symlink directory provided by K8S virtual volume persistence and/or data held via the API and then consequently mounting that data into a virtual volume... However, the symlinks (if you did list directory -all) you could see that the 'data' virtual/application-layer filesystem/partition was, for some reason, sitting up a directory higher (which - correctly assumed, is NOT possible).  So, when server.js looked to call passport.js, passport.js then had a dependency of keys.js configured as: "const '../config/keys.js'", even though both files are clearly in the same directory in the normal/base filesystem.  With that said, I would receive the following error upon completing the deployment of the Pod:
+
+{"log":"[0] \u001b[32m[nodemon] starting `node server.js`\u001b[39m\n","stream":"stdout","time":"2020-01-30T11:10:31.457535143Z"}
+{"log":"[0] internal/modules/cjs/loader.js:638\n","stream":"stdout","time":"2020-01-30T11:10:33.780061423Z"}
+{"log":"[0]     throw err;\n","stream":"stdout","time":"2020-01-30T11:10:33.780102505Z"}
+{"log":"[0]     ^\n","stream":"stdout","time":"2020-01-30T11:10:33.780110009Z"}
+{"log":"[0] \n","stream":"stdout","time":"2020-01-30T11:10:33.780129877Z"}
+{"log":"[0] Error: Cannot find module '../config/keys'\n","stream":"stdout","time":"2020-01-30T11:10:33.780136056Z"}
+{"log":"[0]     at Function.Module._resolveFilename (internal/modules/cjs/loader.js:636:15)\n","stream":"stdout","time":"2020-01-30T11:10:33.780141251Z"}
+{"log":"[0]     at Function.Module._load (internal/modules/cjs/loader.js:562:25)\n","stream":"stdout","time":"2020-01-30T11:10:33.780146684Z"}
+{"log":"[0]     at Module.require (internal/modules/cjs/loader.js:692:17)\n","stream":"stdout","time":"2020-01-30T11:10:33.780151894Z"}
+{"log":"[0]     at require (internal/modules/cjs/helpers.js:25:18)\n","stream":"stdout","time":"2020-01-30T11:10:33.780157136Z"}
+{"log":"[0]     at Object.\u003canonymous\u003e (/opt/mern-auth/config/..2020_01_30_11_10_25.033076288/passport.js:5:14)\n","stream":"stdout","time":"2020-01-30T11:10:33.78016228Z"}
+{"log":"[0]     at Module._compile (internal/modules/cjs/loader.js:778:30)\n","stream":"stdout","time":"2020-01-30T11:10:33.780170843Z"}
+{"log":"[0]     at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)\n","stream":"stdout","time":"2020-01-30T11:10:33.780176369Z"}
+{"log":"[0]     at Module.load (internal/modules/cjs/loader.js:653:32)\n","stream":"stdout","time":"2020-01-30T11:10:33.780181792Z"}
+{"log":"[0]     at tryModuleLoad (internal/modules/cjs/loader.js:593:12)\n","stream":"stdout","time":"2020-01-30T11:10:33.780189979Z"}
+{"log":"[0]     at Function.Module._load (internal/modules/cjs/loader.js:585:3)\n","stream":"stdout","time":"2020-01-30T11:10:33.780208932Z"}
+{"log":"[0]     at Module.require (internal/modules/cjs/loader.js:692:17)\n","stream":"stdout","time":"2020-01-30T11:10:33.780214706Z"}
+{"log":"[0]     at require (internal/modules/cjs/helpers.js:25:18)\n","stream":"stdout","time":"2020-01-30T11:10:33.780241413Z"}
+{"log":"[0]     at Object.\u003canonymous\u003e (/opt/mern-auth/server.js:41:1)\n","stream":"stdout","time":"2020-01-30T11:10:33.780247039Z"}
+{"log":"[0]     at Module._compile (internal/modules/cjs/loader.js:778:30)\n","stream":"stdout","time":"2020-01-30T11:10:33.780252501Z"}
+{"log":"[0]     at Object.Module._extensions..js (internal/modules/cjs/loader.js:789:10)\n","stream":"stdout","time":"2020-01-30T11:10:33.780257658Z"}
+{"log":"[0]     at Module.load (internal/modules/cjs/loader.js:653:32)\n","stream":"stdout","time":"2020-01-30T11:10:33.780262887Z"}
+{"log":"[0] \u001b[31m[nodemon] app crashed - waiting for file changes before starting...\u001b[39m\n","stream":"stdout","time":"2020-01-30T11:10:33.869360586Z"}
+{"log":"[1] \u001b[34mℹ\u001b[39m \u001b[90m｢wds｣\u001b[39m: Project is running at http://172.17.0.6/\n","stream":"stdout","time":"2020-01-30T11:10:36.456053369Z"}
+{"log":"[1] \u001b[34mℹ\u001b[39m \u001b[90m｢wds｣\u001b[39m: webpack output is served from /\n","stream":"stdout","time":"2020-01-30T11:10:36.45677166Z"}
+{"log":"[1] \u001b[34mℹ\u001b[39m \u001b[90m｢wds｣\u001b[39m: Content not from webpack is served from /opt/mern-auth/client/public\n","stream":"stdout","time":"2020-01-30T11:10:36.456814082Z"}
+{"log":"[1] \u001b[34mℹ\u001b[39m \u001b[90m｢wds｣\u001b[39m: 404s will fallback to /index.html\n","stream":"stdout","time":"2020-01-30T11:10:36.456823686Z"}
+
+After noticing these logs I did a bit of tracing to discover that server.js called passport.js and then passport.js would then call keys.js.  I ran an ls -la on the 'config' directory and then saw that the symlinks were in a near infinite-loop, considering it looked as such inside of the container:   
+
+ls -la ./config
+keys.js --> '..data/<random-string-of-numbers>'
+passport.js --> '..data/<random-string-of-numbers>'
+
+From there I did a 'cd' into this ..data directory in which I then attempted to execute the failing line of code inspired by the passport.js file:
+cd ..data
+cat passport.js | grep -i keys
+const keys = require("../config/keys");
+cat ../keys.js
+Error: No such file or directory
+cd ../
+pwd
+/opt/mern-auth/config
+cat keys.js
+module.exports = {
+  mongoURI: "YOUR_MONGO_URI_HERE",
+  secretOrKey: "secret"
+};
+
+
+With that said, I was fortunate enough to discover where the issue was and then diagnose from there.
+Thankfully I found this thread from StackOverflow: 'https://stackoverflow.com/questions/50685385/kubernetes-config-map-symlinks-data-is-there-a-way-to-avoid-them'
+
+This is the particular portion that resolved the issue for me (via the stackoverflow page):
+
+I think this solution is satisfactory : specifying exact file path in mountPath, will get rid of the symlinks to ..data and  ..2018_06_04_19_31_41.860238952
+
+So if I apply such a manifest :
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-lamp-site
+spec:
+    containers:
+    - name: php
+      image: php:7.0-apache
+      volumeMounts:
+      - mountPath: /var/www/html/users.xml
+        name: site-data
+        subPath: users.xml
+    volumes:
+    - name: site-data
+      configMap:
+        name: users
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: users
+data:
+  users.xml: |
+      <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+      <users>
+      </users>
+
+Apparently, I'm making use of subpath explicitly, and they're not part of the "auto update magic" from ConfigMaps, I won't see any more symlinks :
+
+$ kubectl exec  my-lamp-site -c php -- ls -al /var/www/html
+total 12
+drwxr-xr-x 1 www-data www-data 4096 Jun  4 19:18 .
+drwxr-xr-x 1 root     root     4096 Jun  4 17:58 ..
+-rw-r--r-- 1 root     root       73 Jun  4 19:18 users.xml
+
+Be careful to not forget subPath, otherwise users.xml will be a directory !
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+

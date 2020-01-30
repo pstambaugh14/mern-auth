@@ -9,9 +9,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 3Gi
-#Create the PersistentVolumeClaim:
-#kubectl apply -f https://k8s.io/examples/pods/storage/pv-claim.yaml
-
-#Look again at the PersistentVolume:
-#kubectl get pv task-pv-volume
+      storage: 1Gi
