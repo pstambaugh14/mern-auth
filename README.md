@@ -160,12 +160,15 @@ P.S. - Shout-out to the real contributor of the application itself (not just the
 # Credits:
 MERN Authentication app source code is courtesy of: Rishi Prasad (https://blog.bitsrc.io/@rishipr)
 You can check out his original project with installation instructions at: https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669 .
-You can also directly view or download his code at: https://github.com/rishipr/mern-auth .
+You can also directly view or download his code at: https://github.com/rishipr/mern-auth.
+
+# Self-Praise (Credits Continued...):
+My street creds come from having contributed not much to the MERN authentication application it self, but moreso through the practicing of scripting tools through YAML & JSON Minikube/Kubernetes configs, Ansible automation, Full-Dockerization/Containerization of the entire application as well as have being integreated into Jenkins as well. :)
 
 ## License
 
 Created by Patrick Stambaugh.
-https://github.com/pstambaugh14/MERN-AUTH-DOCKER
+https://github.com/pstambaugh14/mern-auth
 
 
 ## Configuration
