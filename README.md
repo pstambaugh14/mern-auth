@@ -1,5 +1,30 @@
 # mern-auth
 
+![Final App](https://i.postimg.cc/tybZb8dL/final-MERNAuth.gif)
+Minimal full-stack MERN app with authentication using passport and JWTs.
+
+This project uses the following technologies:
+
+- [React](https://reactjs.org) and [React Router](https://reacttraining.com/react-router/) for frontend
+- [Express](http://expressjs.com/) and [Node](https://nodejs.org/en/) for the backend
+- [MongoDB](https://www.mongodb.com/) for the database
+- [Redux](https://redux.js.org/basics/usagewithreact) for state management between React components
+
+## Medium Series
+
+- [Build a Login/Auth App with the MERN Stack — Part 1 (Backend)](https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669)
+- [Build a Login/Auth App with the MERN Stack — Part 2 (Frontend & Redux Setup)](https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-2-frontend-6eac4e38ee82)
+- [Build a Login/Auth App with the MERN Stack — Part 3 (Linking Redux with React Components)](https://blog.bitsrc.io/build-a-login-auth-app-with-the-mern-stack-part-3-react-components-88190f8db718)
+
+# MERN-AUTH-DOCKER
+
+created by: Patrick Stambaugh
+Dockerized version of MERN-based authentication application.
+This is one of my first projects so please be kind.
+This isn't of much use other than that of practice for myself.
+Either way, I am open to positive or constructive criticism, please no trolls.
+
+
 # Updates
 # Day One
 - Fixed Security Vulnerabilities that I lost track of - generously provided by GitHub's security alerting system.  This mainly consisted of versioning node modules in either yarn or package files.
@@ -123,29 +148,6 @@ Be careful to not forget subPath, otherwise users.xml will be a directory !
 Is, other than learning a tremendous amount of great knowledge in participating in this, to be able to provide DevOps tools for anyone who wishes to use/test the mern-stack based authentication application.  My goal is simply to script as much as I can to provide to the masses (lel) a final product that is easily deployable, easily stalable and operating-system agnostic using such tools as Ansible, Docker, Jenkins and Kubernetes.  I want to be able to make this simple application good enough through my own scripting to be able to be used in any given enterprise-grade corperation.  This project is not so much about the application itself at all for me, it's moreso a test of my own knowledge to improve my enterprise-grade knowledge-base and skillsets - and it has taught me more than I couldn've ever expected!!  Hope anyone who comes across this enjoys the ease of installation and use I have been able to provided through painstaking sleepless nights XD.  Enjoy!
 P.S. - Shout-out to the real contributor of the application itself (not just the boring scripting that I do...) Rishi Prasad for engaging the Internets into a great, open source and free application for anyone to use and learn from - and for providing amazing documentation via Medium.com as well.  Cheers!
 
-![Final App](https://i.postimg.cc/tybZb8dL/final-MERNAuth.gif)
-Minimal full-stack MERN app with authentication using passport and JWTs.
-
-This project uses the following technologies:
-
-- [React](https://reactjs.org) and [React Router](https://reacttraining.com/react-router/) for frontend
-- [Express](http://expressjs.com/) and [Node](https://nodejs.org/en/) for the backend
-- [MongoDB](https://www.mongodb.com/) for the database
-- [Redux](https://redux.js.org/basics/usagewithreact) for state management between React components
-
-## Medium Series
-
-- [Build a Login/Auth App with the MERN Stack — Part 1 (Backend)](https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-1-c405048e3669)
-- [Build a Login/Auth App with the MERN Stack — Part 2 (Frontend & Redux Setup)](https://blog.bitsrc.io/build-a-login-auth-app-with-mern-stack-part-2-frontend-6eac4e38ee82)
-- [Build a Login/Auth App with the MERN Stack — Part 3 (Linking Redux with React Components)](https://blog.bitsrc.io/build-a-login-auth-app-with-the-mern-stack-part-3-react-components-88190f8db718)
-
-# MERN-AUTH-DOCKER
-
-created by: Patrick Stambaugh
-Dockerized version of MERN-based authentication application.
-This is one of my first projects so please be kind.
-This isn't of much use other than that of practice for myself.
-Either way, I am open to positive or constructive criticism, please no trolls.
 
 # Credits:
 MERN Authentication app source code is courtesy of: Rishi Prasad (https://blog.bitsrc.io/@rishipr)
