@@ -1,5 +1,4 @@
 #!/bin/bash
-su patrick
 pod_exists=`kubectl get pods -n development | grep -i mern-auth | awk '{ print $1 }'`
 
 if [ "$pod_exists" != "mern-auth" ]
