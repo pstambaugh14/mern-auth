@@ -1,6 +1,6 @@
 #!/usr/bin/groovy
 // Declarative Pipeline
-def project = 'mern-auth-jenks-k8s'
+def project = 'mern-auth'
 def appName = 'mern-auth'
 def serviceName = "${appName}-service"
 def imageVersion = 'latest'
@@ -8,11 +8,11 @@ def namespace = 'development'
 def imageTag = "${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 def feSvcName = "mern-auth-service"
 pipeline {
-//agent any {
-  node {
-    echo sh(returnStdout: true, script: 'env')
+//agent any 
+  node 
+    echo sh(returnStdout: true, script: 'env') returnStdout=true
     // ...
-}	
+//}	
 //    stage('Env_vars') {
  //   steps {
  //   echo 'Establishing Environment Variables..'
