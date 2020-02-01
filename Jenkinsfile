@@ -11,15 +11,17 @@ pipeline {
   agent any
     stages {
         stage('Example') {
-            environment { 
-                AN_ACCESS_KEY = credentials('my-prefined-secret-text') 
+            steps
+		environment { 
+//              AN_ACCESS_KEY = credentials('my-prefined-secret-text') 
 		CUR_DIR_VAR = "${WORKSPACE}"
       		PATH = "${pathvar}"
       		registry = "pstambaugh14/mern-auth-jenks-k8s2"
-      		registryCredential = 'dockerhub'
+//     		registryCredential = 'dockerhub'
       		dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'    
             }
-            steps {
+//                steps 
+		{
                 sh 'printenv'
             }
         }
