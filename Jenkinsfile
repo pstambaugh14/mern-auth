@@ -9,8 +9,8 @@ def imageTag = "${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 def feSvcName = "mern-auth-service"
 pipeline {
   agent any
-    stages {
-        stage('Example') {
+    //stages {
+        //stage('Example') {
             //steps
 		environment { 
 //              AN_ACCESS_KEY = credentials('my-prefined-secret-text') 
@@ -20,6 +20,7 @@ pipeline {
 //     		registryCredential = 'dockerhub'
       		dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'    
 		}
+	stages {
         stage('first') {
                 agent { label 'master' }
                 steps {
@@ -56,7 +57,10 @@ pipeline {
         checkout scm }
 }
         stage('Initialize') {
-          steps {
+          steps {   environment {
+       color = "blue"
+   }
+   stages 
               echo "${appName} is the var for appName"
               echo "${WORKSPACE} is the var for WORKSPACE"
   }
