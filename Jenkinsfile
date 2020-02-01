@@ -53,35 +53,35 @@ pipeline {
               echo "${WORKSPACE} is the var for WORKSPACE"
   }
 }
-        stage('Build') {
-            steps {
-              echo 'Building..'
-	            sh 'npm init -y'
-              sh 'npm install'
-              sh 'npm run client-install'
-              sh 'npm install nodemon'
-              sh 'cd client && npm init -y'
-              sh 'cd client && npm install'
-              sh 'cd client && npm install nodemon'
-              sh 'npm audit fix'
-            }
-        }
-        stage('Building image') {
-          steps{
-            script {
-              dockerImage = docker.build registry + ":$BUILD_NUMBER"
-            }
-          }
-        }
-        stage('Deploy Image') {
-          steps{
-             script {
-                docker.withRegistry( '', registryCredential ) {
-                dockerImage.push()
-              }
-            }
-          }
-        }
+//        stage('Build') {
+//            steps {
+//              echo 'Building..'
+//	            sh 'npm init -y'
+//             sh 'npm install'
+//              sh 'npm run client-install'
+//              sh 'npm install nodemon'
+//              sh 'cd client && npm init -y'
+//              sh 'cd client && npm install'
+//              sh 'cd client && npm install nodemon'
+//              sh 'npm audit fix'
+//            }
+//        }
+//        stage('Building image') {
+//          steps{
+//            script {
+//              dockerImage = docker.build registry + ":$BUILD_NUMBER"
+//            }
+//          }
+//        }
+//        stage('Deploy Image') {
+//          steps{
+//             script {
+//                docker.withRegistry( '', registryCredential ) {
+//                dockerImage.push()
+//              }
+//            }
+//          }
+//        }
         stage('Deploy Application') {
           steps {
              sh '"${WORKSPACE}"/pod-check.sh'
@@ -94,11 +94,11 @@ pipeline {
              sh("echo http://`kubectl --namespace=${namespace} get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
       }
   }
-        stage('Remove Unused docker image') {
-          steps{
-            sh "docker rmi $registry:$BUILD_NUMBER"
-          }
-      }
+//        stage('Remove Unused docker image') {
+//          steps{
+//            sh "docker rmi $registry:$BUILD_NUMBER"
+//          }
+//      }
 }
 // IF DESIRED: CLEAN WORKSPACE AFTER BUILD ALSO
         post {
