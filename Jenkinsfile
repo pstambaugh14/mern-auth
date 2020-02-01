@@ -8,8 +8,8 @@ def namespace = 'development'
 def imageTag = "${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 def feSvcName = "mern-auth-service"
 pipeline {
-  agent any
-  node {
+  agent any {
+//  node {
     echo sh(returnStdout: true, script: 'env')
     // ...
 }	
