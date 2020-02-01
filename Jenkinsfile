@@ -1,4 +1,4 @@
-#!/usr/bin/groovy
+#!/usr/share/groovy
 // Declarative Pipeline
 def project = 'mern-auth'
 def appName = 'mern-auth'
@@ -9,24 +9,43 @@ def imageTag = "${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 def feSvcName = "mern-auth-service"
 pipeline {
   agent any
+   //agent none
     //stages {
         //stage('Example') {
             //steps
-		environment { 
+//		environment { 
 //              AN_ACCESS_KEY = credentials('my-prefined-secret-text') 
-		CUR_DIR_VAR = "${WORKSPACE}"
-      		PATH = "${pathvar}"
-      		registry = "pstambaugh14/mern-auth-jenks-k8s2"
+//		CUR_DIR_VAR = "${WORKSPACE}"
+//     		JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
+//		PATH = "${pathvar}"
+//     		registry = "pstambaugh14/mern-auth-jenks-k8s2"
 //     		registryCredential = 'dockerhub'
-      		dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'    
-		}
-	stages {
-        stage('first') {
-                agent { label 'master' }
-                steps {
-                   sh "printenv | sort"
-            }
-	}		
+//      		dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'    
+//		}
+   stages {
+       stage ('Preparation') {
+         agent { label 'master'}
+           environment {
+               JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
+	       CUR_DIR_VAR = "${WORKSPACE}"  
+	       registry = "pstambaugh14/mern-auth-jenks-k8s2"
+	       dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'	   
+	    }
+           //stages {
+             //stage ('Preparation') {	       
+	       steps {
+               echo "Hello world"
+               echo "PATH=${JENKINS_PATH}"
+               sh 'echo "JP=$JENKINS_PATH"'
+	   }
+       }	       
+//   stages {
+//        stage('first') {
+//                agent { label 'master' }
+//               steps {
+//                   sh "printenv | sort"
+//            }
+//	}		
 //            printenv
 //		steps { 
 //		sh 'printenv'
