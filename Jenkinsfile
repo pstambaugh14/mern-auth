@@ -9,11 +9,15 @@ def imageTag = "${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 def feSvcName = "mern-auth-service"
 pipeline {
   agent any
-    stage('Env') {
-    steps {
-    echo 'Establishing Environment Variables..'
-    pathvar=`sh 'printenv |grep -i path'`
-}
+  node {
+    echo sh(returnStdout: true, script: 'env')
+    // ...
+}	
+//    stage('Env_vars') {
+ //   steps {
+ //   echo 'Establishing Environment Variables..'
+ //   pathvar= sh 'printenv |grep -i path'
+//}
 
     environment {
       CUR_DIR_VAR = "${WORKSPACE}"
