@@ -57,10 +57,9 @@ pipeline {
         checkout scm }
 }
         stage('Initialize') {
-          steps {   environment {
-       color = "blue"
-   }
-   stages 
+          steps {   
+//   }
+//   stages 
               echo "${appName} is the var for appName"
               echo "${WORKSPACE} is the var for WORKSPACE"
   }
