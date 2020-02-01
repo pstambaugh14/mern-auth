@@ -9,9 +9,16 @@ def imageTag = "${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 def feSvcName = "mern-auth-service"
 pipeline {
   agent any
+    stage('Env') {
+    steps {
+    echo 'Establishing Environment Variables..'
+    pathvar=`sh 'printenv |grep -i path'`
+}
+
     environment {
       CUR_DIR_VAR = "${WORKSPACE}"
-      PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/var/lib/jenkins/npm/bin"
+//      PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/var/lib/jenkins/npm/bin"
+      PATH = "${pathvar}"
       registry = "pstambaugh14/mern-auth-jenks-k8s2"
       registryCredential = 'dockerhub'
       dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
