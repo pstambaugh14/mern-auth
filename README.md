@@ -32,6 +32,9 @@ This project uses the following technologies:
 # MERN-AUTH-K8S 
 - Surprisingly ready to go (after a LOT of tinkering that is... lol). :)
 
+# New Goals:
+- Figure out how to hash ConfigMap config.
+
 
 # Updates
 # Day One
