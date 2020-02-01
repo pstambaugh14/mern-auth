@@ -9,8 +9,9 @@ def imageTag = "${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 def feSvcName = "mern-auth-service"
 pipeline {
 //agent any 
-  node 
-    echo sh(returnStdout: true, script: 'env') returnStdout=true
+  node
+    returnStdout=true	
+	echo sh(returnStdout: true, script: 'env') 
     // ...
 //}	
 //    stage('Env_vars') {
