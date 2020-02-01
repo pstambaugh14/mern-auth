@@ -28,6 +28,8 @@ You can also directly view or download his code at: https://github.com/rishipr/m
 - Goal: Add environment variables.  Done-ish.  Fixed the script so that it can be run universally.  Noticed I had my own local directories assigned to some configs and parts of scripts...
 - Goal: Dockerize Image for Container deployment - done! https://cloud.docker.com/repository/docker/pstambaugh14/mernauthansible_api
 
+# - New Goal: Configure SELinux Enforcing
+
 
 ## To-Do
 
