@@ -19,11 +19,18 @@ pipeline {
       		registry = "pstambaugh14/mern-auth-jenks-k8s2"
 //     		registryCredential = 'dockerhub'
       		dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'    
-            printenv}
-		steps { 
-		sh 'printenv'
+		}
+        stage('first') {
+                agent { label 'master' }
+                steps {
+                   sh "printenv | sort"
             }
-        }
+	}		
+//            printenv
+//		steps { 
+//		sh 'printenv'
+//            }
+//        }
 //  node
 //    returnStdout=true	
 //	echo sh(returnStdout: true, script: 'env') 
