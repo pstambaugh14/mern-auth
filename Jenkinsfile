@@ -7,6 +7,15 @@ def imageVersion = 'latest'
 def namespace = 'development'
 def imageTag = "${project}/${appName}:${imageVersion}.${env.BUILD_NUMBER}"
 def feSvcName = "mern-auth-service"
+
+
+export "CaCertPath"="/home/patrick/.minikube/certs/ca.pem"
+export "ServerCertPath"="/home/patrick/.minikube/machines/server.pem"
+export "ClientCertPath"="/home/patrick/.minikube/certs/cert.pem"#Manual configuration will need to be assigned to your environment for your credentials for API comms.
+def = "CaCertPath"="/home/patrick/.minikube/certs/ca.pem"
+def = "ServerCertPath"="/home/patrick/.minikube/machines/server.pem"
+def = "ClientCertPath"="/home/patrick/.minikube/certs/cert.pem"
+	
 pipeline {
   agent any
    //agent none
