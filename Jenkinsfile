@@ -124,7 +124,7 @@ pipeline {
 //        }
         stage('Deploy Application') {
           steps {
-             //sh 'chmod +x "${WORKSPACE}"/pod-check.sh'
+             sh 'chmod 0744 "${WORKSPACE}"/pod-check.sh'
 	     sh '"${WORKSPACE}"/pod-check.sh'
              sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")
              //Update the imagetag to the latest version
