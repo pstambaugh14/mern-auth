@@ -1,0 +1,29 @@
+-rw-r--r--.  1 patrick patrick 1139 Jan  9 08:47 haproxy.cfg
+-rw-r--r--.  1 patrick patrick  397 Jan  9 08:47 hosts
+-rw-r--r--.  1 patrick patrick  187 Jan  9 08:47 keys.js
+-rw-r--r--.  1 patrick patrick  974 Jan  9 08:47 package.json
+-rw-r--r--.  1 patrick patrick 5959 Jan  9 08:47 playbook.yml
+-rw-r--r--.  1 patrick patrick   82 Jan  9 08:47 pm2.sh
+-rw-r--r--.  1 patrick patrick  121 Jan  9 08:47 pm2_start.sh
+-rw-rw-r--.  1 patrick patrick 3249 Feb  1 00:27 README.md
+-rw-r--r--.  1 patrick patrick  147 Jan  9 08:47 services_start.sh
+-rw-r--r--.  1 patrick patrick   58 Jan  9 08:47 start-ansible.sh
+-rw-r--r--.  1 patrick patrick  293 Jan  9 08:47 systemctl.sh
+
+
+I. Make as HA Cluster: Priority 2
+
+1) Re-Write Script to change from Pods to Deployments as to be able to utilize them via k8s HA LB in addion to enable auto-restarts to thwart downed pods.
+
+2) Re-Configure then 'deployment' YAML's to utilize Ingress / HA LB w/ at least 2 pods deployed to start.
+
+-------------------------------------------------------------------------------------------------------
+
+II. Incorperate pm2 for better production usage: Priority 3
+
+1a) Incorperate pm2 as a Daemon set - see if it can be configured to specified 'labels'.  OR
+1b) Incorperate pm2 as a Daemon strictly running on each pod.
+
+-------------------------------------------------------------------------------------------------------
+
+III. Write Ansible script to be able to deploy easily the entire application: Priority 2

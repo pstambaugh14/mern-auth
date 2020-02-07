@@ -131,8 +131,12 @@ pipeline {
              sh("sed -i.bak 's#${project}/${appName}:${imageVersion}#${imageTag}#' ${WORKSPACE}/k8s/deploy/*.yaml")
              //Create or update resources
              sh("kubectl --namespace=${namespace} apply -f ${WORKSPACE}/k8s/deploy/deployment.yaml")
-             //Grab the external Ip address of the service
-             sh("echo http://`kubectl --namespace=${namespace} get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
+             //Grab the external IP address of the service
+             //sh("echo http://`kubectl --namespace=${namespace} get service/${feSvcName} --output=json | jq -r '.status.loadBalancer.ingress[0].ip'` > ${feSvcName}")
+             //Grab the internal IP address of the service if using Minikube
+             //sh("minikube service list | grep -i ${feSvcName} | awk '{ print $6 }' > ${feSvcName}")
+             sh 'chmod 0744 "${WORKSPACE}"/service-ip.sh'
+             sh '"${WORKSPACE}"/service-ip.sh'
       }
   }
 //        stage('Remove Unused docker image') {
