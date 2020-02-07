@@ -137,7 +137,7 @@ pipeline {
              //sh("minikube service list | grep -i ${feSvcName} | awk '{ print $6 }' > ${feSvcName}")
              sh 'chmod 0744 "${WORKSPACE}"/service-ip.sh'
              sh '"${WORKSPACE}"/service-ip.sh'
-             sh("minikube service list | grep -i ${feSvcName} | awk '{ print "$6" }' > ${feSvcName}")
+             //sh 'minikube service list | grep -i "${feSvcName}" | awk '{ print "$6" }' > "${feSvcName}"'
       }
   }
 //        stage('Remove Unused docker image') {
