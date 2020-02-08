@@ -41,6 +41,7 @@ pipeline {
 	             registry = "pstambaugh14/mern-auth-jenks-k8s2"
 	             dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
                PATH2 = "${PATH2}"
+               //MK_HOME = "${PATH2}"
 	             }
                  //stages {
                  //stage ('Preparation') {
@@ -147,8 +148,8 @@ pipeline {
                  // some block
               //node {
                //withEnv(['MK_HOME=${PATH2}']) {
-             MK_HOME = "${PATH2}"
-             sh '$MK_HOME/minikube service list | grep -i "${feSvcName}" | awk '{ print $6 }'  > "${feSvcName}"'
+             //MK_HOME = "${PATH2}"
+             sh '"${PATH2}"/minikube service list | grep -i "${feSvcName}" | awk '{ print $6 }'  > "${feSvcName}"'
                     //}
                   //}
                  //sh 'chmod 0744 ${WORKSPACE}/mkpath.sh'
