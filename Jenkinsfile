@@ -60,7 +60,7 @@ pipeline {
                //echo "${WORKSPACE}"
                //sh 'PATH1=`whereis minikube`'
                sh """#!/bin/bash
-               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
+               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`, , returnStdout: true).trim()
                """
                //echo "${$PATH2}"
 	     }
