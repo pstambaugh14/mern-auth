@@ -207,7 +207,7 @@ pipeline {
              DEBUG_FLAGS = '-g'
              CUR_DIR_VAR = "${WORKSPACE}"
              //PATH = "${PATH}"
-             MK_HOME = "${PATH2}"
+             MK_HOME = "${MINI2}"
           }
           agent { label 'master'}
           steps {
@@ -217,15 +217,17 @@ pipeline {
              //node {
                //steps {
                  //PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
-                 sh """#!/bin/bash
-                 PATH1 = `'whereis minikube'`
-                 PATH2 =`echo "{$PATH1}" | awk '{ print \$2 }' | sed 's/minikube//g'`
-                 """
-               withEnv(['MK_HOME=${PATH2}']) {
+                 //sh """#!/bin/bash
+                 //PATH1 = `'whereis minikube'`
+                 //PATH2 =`echo "{$PATH1}" | awk '{ print \$2 }' | sed 's/minikube//g'`
+                 //"""
+                 sh('"${WORKSPACE}"/mkpath.sh')
+               withEnv(['MK_HOME=${MINI2}']) {
                  withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                   sh """#!/bin/bash
-                   '"${MK_HOME}"/minikube service list | grep -i "${feSvcName}" | awk '{ print "\$6" }'  > "${feSvcName}"'
-                   """
+//                   sh """#!/bin/bash
+//                   '"${MK_HOME}"/minikube service list | grep -i "${feSvcName}" | awk '{ print "\$6" }'  > "${feSvcName}"'
+//                   """
+                  sh('"${WORKSPACE}"/service-ip.sh')
                  }
              // some block
                     //}
