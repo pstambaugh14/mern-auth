@@ -18,9 +18,7 @@ def feSvcName = "mern-auth-service"
 //def = "ClientCertPath"="/home/patrick/.minikube/certs/cert.pem"
 
 pipeline {
-  agent {
-    any
-  }
+  agent any
   environment {
       JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
       SHELL = '/bin/bash'
@@ -29,7 +27,7 @@ pipeline {
       dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
       PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
       sh """#!/bin/bash
-      PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
+      PATH2 =`echo "{$PATH1}" | awk '{ print \$2 }' | sed 's/minikube//g'`
       """
     }
    //agent none
@@ -47,16 +45,20 @@ pipeline {
 //		}
    stages {
        stage ('Preparation') {
+         environment {
+            DEBUG_FLAGS = '-g'
+         }
          agent { label 'master'}
          steps {
                CUR_DIR_VAR = "${WORKSPACE}"
                echo 'Establishing Environment Variables..'
+               sh 'printenv'
                pathvar = sh 'printenv |grep -i path'
                echo "${pathvar}"
-               //echo "Hello world"
-               //echo "PATH=${JENKINS_PATH}"
-               //sh 'echo "JP=$JENKINS_PATH"'
-               //echo "${WORKSPACE}"
+               echo "Hello world"
+               echo "PATH=${JENKINS_PATH}"
+               sh 'echo "JP=$JENKINS_PATH"'
+               echo "${WORKSPACE}"
                //sh 'PATH1=`whereis minikube`'
 //               sh """#!/bin/bash
 //               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
@@ -162,6 +164,16 @@ pipeline {
 //          }
 //        }
         stage('Deploy Application') {
+          environment {
+             DEBUG_FLAGS = '-g'
+          }
+          agent { label 'master'}
+          steps {
+                CUR_DIR_VAR = "${WORKSPACE}"
+                echo 'Establishing Environment Variables..'
+                sh 'printenv'
+                pathvar = sh 'printenv |grep -i path'
+              }
           steps {
              sh 'chmod 0744 "${WORKSPACE}"/pod-check.sh'
 	           sh '"${WORKSPACE}"/pod-check.sh'
