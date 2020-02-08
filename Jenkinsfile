@@ -37,18 +37,24 @@ pipeline {
          agent { label 'master'}
            environment {
                JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
-	       CUR_DIR_VAR = "${WORKSPACE}"
-	       registry = "pstambaugh14/mern-auth-jenks-k8s2"
-	       dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
-	    }
-           //stages {
-             //stage ('Preparation') {
+	             CUR_DIR_VAR = "${WORKSPACE}"
+	             registry = "pstambaugh14/mern-auth-jenks-k8s2"
+	             dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
+               PATH2 = "${PATH2}"
+	             }
+                 //stages {
+                 //stage ('Preparation') {
 	       steps {
                echo "Hello world"
                echo "PATH=${JENKINS_PATH}"
                sh 'echo "JP=$JENKINS_PATH"'
-	   }
-       }
+               echo "${WORKSPACE}"
+               sh 'PATH1=`whereis minikube`'
+               sh 'PATH2=`echo $PATH1 | awk '{ print $2 }' | sed 's/minikube//g'`'
+               echo "${$PATH2}"
+
+	     }
+  }
 //   stages {
 //        stage('first') {
 //                agent { label 'master' }
@@ -138,14 +144,19 @@ pipeline {
              //sh 'printenv'
              //withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                  // some block
+              node {
+               withEnv(['MK_HOME=${PATH2}']) {
+                 sh '$MK_HOME/minikube service list | grep -i "${feSvcName}" | awk '{ print $6 }'  > "${feSvcName}"'
+                    }
+                  }
                  sh 'chmod 0744 ${WORKSPACE}/mkpath.sh'
                  sh '${WORKSPACE}/mkpath.sh'
                  //sh """#!/bin/bash
                  //echo "${path2}"
-                 sh 'echo $PATH2'
-                 export PATH2=$PATH2
+                 //sh 'echo $PATH2'
+                 //export PATH2=$PATH2
                  sh 'chmod 0744 ${WORKSPACE}/service-ip.sh'
-                 sh '${WORKSPACE}/service-ip.sh'                 
+                 sh '${WORKSPACE}/service-ip.sh'
                  //echo USERNAME
                  //sh ("${path2} service list | grep -i ${feSvcName} | awk '{ print "${6}" }'")
                  //"""
