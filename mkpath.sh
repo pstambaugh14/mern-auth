@@ -1,5 +1,5 @@
 #!/bin/bash
 
-path1=`whereis minikube`
-path2=`echo $path1 | awk '{ print $2 }'`
-echo "$path2"
+PATH1=`whereis minikube`
+PATH2=`echo $PATH1| awk '{ print $2 }'`
+echo "$PATH2"

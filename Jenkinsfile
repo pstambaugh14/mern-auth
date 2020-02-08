@@ -141,13 +141,27 @@ pipeline {
                  sh 'chmod 0744 ${WORKSPACE}/mkpath.sh'
                  sh '${WORKSPACE}/mkpath.sh'
                  //sh """#!/bin/bash
-                 echo "${path2}"
+                 //echo "${path2}"
+                 sh 'echo $PATH2'
+                 sh 'echo $USERNAME'
                  //sh ("${path2} service list | grep -i ${feSvcName} | awk '{ print "${6}" }'")
-                    //"""
-//                  '!#/usr/share/groovy > "${feSvcName}"'
+                 //"""
                  sh 'chmod 0744 "${WORKSPACE}"/service-ip.sh'
                  sh 'sudo "${WORKSPACE}"/service-ip.sh'
              }
+
+
+             //withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+               // available as an env variable, but will be masked if you try to print it out any which way
+               // note: single quotes prevent Groovy interpolation; expansion is by Bourne Shell, which is what you want
+               //sh 'echo $PASSWORD'
+               // also available as a Groovy variable
+               //echo USERNAME
+               // or inside double quotes for string interpolation
+               //echo "username is $USERNAME"
+             //}
+
+
              //sh 'minikube service list | grep -i "${feSvcName}" | awk '{ print "$6" }' > "${feSvcName}"'
       }
   }
@@ -156,11 +170,11 @@ pipeline {
 //            sh "docker rmi $registry:$BUILD_NUMBER"
 //          }
 //      }
-}
+ }
 // IF DESIRED: CLEAN WORKSPACE AFTER BUILD ALSO
-        post {
-          always {
-            cleanWs()
-    	}
-    }
-  }
+//        post {
+//          always {
+//            cleanWs()
+//    	}
+//    }
+}
