@@ -149,7 +149,9 @@ pipeline {
               //node {
                //withEnv(['MK_HOME=${PATH2}']) {
              //MK_HOME = "${PATH2}"
+             sh """#!/bin/bash
              sh '"${MK_HOME}"/minikube service list | grep -i "${feSvcName}" | awk '{ print $6 }'  > "${feSvcName}"'
+             """
                     //}
                   //}
                  //sh 'chmod 0744 ${WORKSPACE}/mkpath.sh'
