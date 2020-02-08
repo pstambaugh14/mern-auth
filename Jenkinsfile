@@ -50,9 +50,10 @@ pipeline {
                sh 'echo "JP=$JENKINS_PATH"'
                echo "${WORKSPACE}"
                sh 'PATH1=`whereis minikube`'
-               sh 'PATH2=`echo $PATH1 | awk '{ print $2 }' | sed 's/minikube//g'`'
+               sh """#!/bin/bash
+               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
+               """
                echo "${$PATH2}"
-
 	     }
   }
 //   stages {
@@ -142,25 +143,25 @@ pipeline {
              //Grab the internal IP address of the service if using Minikube
              //sh("minikube service list | grep -i ${feSvcName} | awk '{ print $6 }' > ${feSvcName}")
              //sh 'printenv'
-             //withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+             withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                  // some block
               node {
                withEnv(['MK_HOME=${PATH2}']) {
                  sh '$MK_HOME/minikube service list | grep -i "${feSvcName}" | awk '{ print $6 }'  > "${feSvcName}"'
                     }
                   }
-                 sh 'chmod 0744 ${WORKSPACE}/mkpath.sh'
-                 sh '${WORKSPACE}/mkpath.sh'
+                 //sh 'chmod 0744 ${WORKSPACE}/mkpath.sh'
+                 //sh '${WORKSPACE}/mkpath.sh'
                  //sh """#!/bin/bash
                  //echo "${path2}"
                  //sh 'echo $PATH2'
                  //export PATH2=$PATH2
-                 sh 'chmod 0744 ${WORKSPACE}/service-ip.sh'
-                 sh '${WORKSPACE}/service-ip.sh'
+                 //sh 'chmod 0744 ${WORKSPACE}/service-ip.sh'
+                 //sh '${WORKSPACE}/service-ip.sh'
                  //echo USERNAME
                  //sh ("${path2} service list | grep -i ${feSvcName} | awk '{ print "${6}" }'")
                  //"""
-             //}
+             }
 
 
              //withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
