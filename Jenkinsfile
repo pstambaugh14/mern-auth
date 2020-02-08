@@ -205,7 +205,6 @@ pipeline {
                 echo 'Establishing Environment Variables..'
                 sh 'printenv'
                 echo '$PATH'
-                }
              //node {
                //steps {
                  sh """#!/bin/bash
@@ -217,6 +216,7 @@ pipeline {
                    sh """#!/bin/bash
                    '"${MK_HOME}"/minikube service list | grep -i "${feSvcName}" | awk '{ print "\$6" }'  > "${feSvcName}"'
                    """
+                 }
              // some block
                     //}
                   //}
