@@ -141,8 +141,8 @@ pipeline {
                  sh 'chmod 0744 "${WORKSPACE}"/mkpath.sh'
                  sh '"${WORKSPACE}"/mkpath.sh'
                  //sh """#!/bin/bash
-                 sh 'echo "${path2}"'
-                 sh '$path2 service list | grep -i "${feSvcName}" | awk '{print "${6}"}''
+                 echo "${path2}"
+                 sh("${path2} service list | grep -i "${feSvcName}" | awk '{print "${6}"}'")
                     //"""
 //                  '!#/usr/share/groovy > "${feSvcName}"'
 //                 sh 'chmod 0744 "${WORKSPACE}"/service-ip.sh'
