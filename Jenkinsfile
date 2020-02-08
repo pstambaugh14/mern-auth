@@ -30,7 +30,7 @@ pipeline {
       PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
       sh """#!/bin/bash
       PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
-      """`
+      """
     }
    //agent none
     //stages {
@@ -84,7 +84,7 @@ pipeline {
                //PATH2 = "$PATH2"
                //sh 'PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`'
                //MK_HOME = "${PATH2}"
-	             }
+
                  //stages {
                  //stage ('Preparation') {
 
