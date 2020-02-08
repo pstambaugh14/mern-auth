@@ -42,7 +42,7 @@ pipeline {
 	             dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
                PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
                //PATH2 = sh(script: '`echo "$PATH1" | awk '{ print "${2}" }' | sed 's/minikube//g'`', , returnStdout: true).trim()
-               PATH2 = "$PATH15"
+        //       PATH2 = "$PATH15"
                //sh """#!/bin/bash
                //PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
                //"""
@@ -54,13 +54,13 @@ pipeline {
                  //stages {
                  //stage ('Preparation') {
 	       steps {
-               echo "Hello world"
-               echo "PATH=${JENKINS_PATH}"
-               sh 'echo "JP=$JENKINS_PATH"'
-               echo "${WORKSPACE}"
+               //echo "Hello world"
+               //echo "PATH=${JENKINS_PATH}"
+               //sh 'echo "JP=$JENKINS_PATH"'
+               //echo "${WORKSPACE}"
                //sh 'PATH1=`whereis minikube`'
                sh """#!/bin/bash
-               PATH15=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
+               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
                """
                //echo "${$PATH2}"
 	     }
