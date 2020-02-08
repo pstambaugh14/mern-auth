@@ -36,8 +36,8 @@ pipeline {
        stage ('Preparation') {
          agent { label 'master'}
            environment {
-               JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
-	             CUR_DIR_VAR = "${WORKSPACE}"
+               //JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
+               CUR_DIR_VAR = "${WORKSPACE}"
 	             registry = "pstambaugh14/mern-auth-jenks-k8s2"
 	             dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
                PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
@@ -54,13 +54,16 @@ pipeline {
                  //stages {
                  //stage ('Preparation') {
 	       steps {
+               echo 'Establishing Environment Variables..'
+               pathvar= sh 'printenv |grep -i path'
+               echo "${pathvar}"
                //echo "Hello world"
                //echo "PATH=${JENKINS_PATH}"
                //sh 'echo "JP=$JENKINS_PATH"'
                //echo "${WORKSPACE}"
                //sh 'PATH1=`whereis minikube`'
                sh """#!/bin/bash
-               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`, , returnStdout: true).trim()
+               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
                """
                //echo "${$PATH2}"
 	     }
@@ -153,13 +156,14 @@ pipeline {
              //sh("minikube service list | grep -i ${feSvcName} | awk '{ print $6 }' > ${feSvcName}")
              //sh 'printenv'
              withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-                 // some block
-              //node {
-               //withEnv(['MK_HOME=${PATH2}']) {
-             //MK_HOME = "${PATH2}"
+
              sh """#!/bin/bash
              '"${MK_HOME}"/minikube service list | grep -i "${feSvcName}" | awk '{ print "\$6" }'  > "${feSvcName}"'
              """
+             // some block
+          //node {
+           //withEnv(['MK_HOME=${PATH2}']) {
+         //MK_HOME = "${PATH2}"
                     //}
                   //}
                  //sh 'chmod 0744 ${WORKSPACE}/mkpath.sh'
