@@ -162,7 +162,7 @@ pipeline {
 //            }
 //          }
 //        }
-        stage('Deploy Application') {
+        stage ('Deploy Application') {
             environment {
                DEBUG_FLAGS = '-g'
                CUR_DIR_VAR = "${WORKSPACE}"
@@ -180,7 +180,7 @@ pipeline {
                   //echo '$PATH'=PATH
                   //sh 'echo "JP=$JENKINS_PATH"'
                   echo "${WORKSPACE}"
-                }
+
              sh 'chmod 0744 "${WORKSPACE}"/pod-check.sh'
 	           sh '"${WORKSPACE}"/pod-check.sh'
              sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")
@@ -194,8 +194,8 @@ pipeline {
              //sh("minikube service list | grep -i ${feSvcName} | awk '{ print $6 }' > ${feSvcName}")
              //sh 'printenv'
        }
-
-        stage('List mern-auth Service IP and Port for Access') {
+}
+        stage ('List mern-auth Service IP and Port for Access') {
           environment {
              DEBUG_FLAGS = '-g'
              CUR_DIR_VAR = "${WORKSPACE}"
