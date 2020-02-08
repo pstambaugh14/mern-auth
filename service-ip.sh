@@ -12,4 +12,4 @@ source ./mkpath.sh
 
 #sudo -S /usr/local/bin/minikube/minikube service list | grep -i "${feSvcName}" | awk '{ print $6 }'
 
-/usr/local/bin/minikube/minikube service list | grep -i "${feSvcName}" | awk '{ print $6 }'
+/usr/local/bin/minikube/ service list | grep -i "${feSvcName}" | awk '{ print $6 }'
