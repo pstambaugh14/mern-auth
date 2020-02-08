@@ -121,12 +121,12 @@ pipeline {
 //      dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
 //          }
 //   stages {
-      stage('Checkout') {
-        node {
-          //steps {
+      stage ('Checkout') {
+        //node {
+          steps {
         checkout scm }
 }
-        stage('Initialize') {
+        stage ('Initialize') {
           steps {
 //   }
 //   stages
