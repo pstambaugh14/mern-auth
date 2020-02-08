@@ -138,8 +138,12 @@ pipeline {
              //sh 'printenv'
              withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                  // some block
-                 sh 'chmod 0744 "${WORKSPACE}"/service-ip.sh'
-                 sh 'sudo "${WORKSPACE}"/service-ip.sh'
+                 sh 'chmod 0744 "${WORKSPACE}"/mkpath.sh'
+                 sh '"${WORKSPACE}"/mkpath.sh'
+                 echo "$path2"
+                 sh '$path2/minikube service list | grep -i "${feSvcName}" | awk '{ print "$6" }' > "${feSvcName}"'
+//                 sh 'chmod 0744 "${WORKSPACE}"/service-ip.sh'
+//                 sh 'sudo "${WORKSPACE}"/service-ip.sh'
              }
              //sh 'minikube service list | grep -i "${feSvcName}" | awk '{ print "$6" }' > "${feSvcName}"'
       }
