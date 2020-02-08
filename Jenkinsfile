@@ -41,10 +41,11 @@ pipeline {
 	             registry = "pstambaugh14/mern-auth-jenks-k8s2"
 	             dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
                PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
-               sh """#!/bin/bash
-               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
-               """
-               PATH2 = "$PATH2"
+               PATH2 = sh(script: '`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`', , returnStdout: true).trim()
+               //sh """#!/bin/bash
+               //PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
+               //"""
+               //PATH2 = "$PATH2"
                //sh 'PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`'
                MK_HOME = "${PATH2}"
                //MK_HOME = "${PATH2}"
