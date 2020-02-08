@@ -199,6 +199,7 @@ pipeline {
           environment {
              DEBUG_FLAGS = '-g'
              CUR_DIR_VAR = "${WORKSPACE}"
+             MK_HOME = "${PATH2}"
           }
           agent { label 'master'}
           steps {
@@ -210,7 +211,6 @@ pipeline {
                  sh """#!/bin/bash
                  PATH2 =`echo "{$PATH1}" | awk '{ print \$2 }' | sed 's/minikube//g'`
                  """
-                 MK_HOME = "${PATH2}"
                withEnv(['MK_HOME=${PATH2}']) {
                  withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                    sh """#!/bin/bash
