@@ -20,10 +20,12 @@ def feSvcName = "mern-auth-service"
 pipeline {
   agent any
   environment {
-      JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
-      SHELL = '/bin/bash'
+//      JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
+      DEBUG_FLAGS = '-g'
+      JENKINS_PATH = '$PWD'
+      SHELL = /bin/bash
       PATH = '$PATH'
-      registry = "pstambaugh14/mern-auth-jenks-k8s2"
+      registry = 'pstambaugh14/mern-auth-jenks-k8s2'
       dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
       //PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
     }
@@ -46,12 +48,13 @@ pipeline {
             DEBUG_FLAGS = '-g'
             CUR_DIR_VAR = "${WORKSPACE}"
             PATH = '$PATH'
-         }
+          }
          agent { label 'master'}
          steps {
                echo 'Establishing Environment Variables..'
                sh 'printenv'
                echo '$PATH'
+               //echo '$PATH'
                //pathvar = sh 'printenv |grep -i path'
                //echo "${pathvar}"
                echo "Hello world"
