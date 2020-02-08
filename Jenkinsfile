@@ -26,9 +26,6 @@ pipeline {
       registry = "pstambaugh14/mern-auth-jenks-k8s2"
       dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
       PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
-      sh """#!/bin/bash
-      PATH2 =`echo "{$PATH1}" | awk '{ print \$2 }' | sed 's/minikube//g'`
-      """
     }
    //agent none
     //stages {
@@ -191,15 +188,27 @@ pipeline {
     }
 
         stage('List mern-auth Service IP and Port for Access') {
+          environment {
+             DEBUG_FLAGS = '-g'
+          }
+          agent { label 'master'}
+          steps {
+                CUR_DIR_VAR = "${WORKSPACE}"
+                echo 'Establishing Environment Variables..'
+                sh 'printenv'
+                pathvar = sh 'printenv |grep -i path'
+              }
              node {
                steps {
+                 sh """#!/bin/bash
+                 PATH2 =`echo "{$PATH1}" | awk '{ print \$2 }' | sed 's/minikube//g'`
+                 """
+                 MK_HOME = "${PATH2}"
                withEnv(['MK_HOME=${PATH2}']) {
-               MK_HOME = "${PATH2}"
                  withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
-
-             sh """#!/bin/bash
-             '"${MK_HOME}"/minikube service list | grep -i "${feSvcName}" | awk '{ print "\$6" }'  > "${feSvcName}"'
-             """
+                   sh """#!/bin/bash
+                   '"${MK_HOME}"/minikube service list | grep -i "${feSvcName}" | awk '{ print "\$6" }'  > "${feSvcName}"'
+                   """
              // some block
                     //}
                   //}
@@ -215,7 +224,7 @@ pipeline {
                  //sh ("${path2} service list | grep -i ${feSvcName} | awk '{ print "${6}" }'")
                  //"""
              }
-
+           }
 
              //withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                // available as an env variable, but will be masked if you try to print it out any which way
@@ -243,4 +252,3 @@ pipeline {
 //            cleanWs()
 //    	}
 //    }
-}
