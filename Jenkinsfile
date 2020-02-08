@@ -40,8 +40,12 @@ pipeline {
 	             CUR_DIR_VAR = "${WORKSPACE}"
 	             registry = "pstambaugh14/mern-auth-jenks-k8s2"
 	             dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
-               PATH1 = "${PATH1}"
-               PATH2 = sh(script: 'PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`', , returnStdout: true).trim()
+               PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
+               sh """#!/bin/bash
+               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
+               """
+               PATH2 = "$PATH2"
+               sh 'PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`'
                MK_HOME = "${PATH2}"
                //MK_HOME = "${PATH2}"
 	             }
@@ -52,11 +56,11 @@ pipeline {
                echo "PATH=${JENKINS_PATH}"
                sh 'echo "JP=$JENKINS_PATH"'
                echo "${WORKSPACE}"
-               sh 'PATH1=`whereis minikube`'
-               sh """#!/bin/bash
-               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
-               """
-               echo "${$PATH2}"
+               //sh 'PATH1=`whereis minikube`'
+               //sh """#!/bin/bash
+               //PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
+               //"""
+               //echo "${$PATH2}"
 	     }
   }
 //   stages {
