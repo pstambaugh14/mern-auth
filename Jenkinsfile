@@ -22,7 +22,7 @@ pipeline {
   environment {
 //      JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
       DEBUG_FLAGS = '-g'
-      JENKINS_PATH = '$PWD'
+      //JENKINS_PATH = '$PWD'
       SHELL = "/bin/bash"
       //PATH = "${PATH}"
       registry = 'pstambaugh14/mern-auth-jenks-k8s2'
