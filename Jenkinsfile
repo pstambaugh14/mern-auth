@@ -142,8 +142,8 @@ pipeline {
                  sh '${WORKSPACE}/mkpath.sh'
                  //sh """#!/bin/bash
                  //echo "${path2}"
-                 sh 'echo $PATH2'
-                 sh 'echo $USERNAME'
+                 echo PATH2
+                 echo USERNAME
                  //sh ("${path2} service list | grep -i ${feSvcName} | awk '{ print "${6}" }'")
                  //"""
                  sh 'chmod 0744 "${WORKSPACE}"/service-ip.sh'
