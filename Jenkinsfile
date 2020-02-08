@@ -45,7 +45,7 @@ pipeline {
                PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
                """
                PATH2 = "$PATH2"
-               sh 'PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`'
+               //sh 'PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`'
                MK_HOME = "${PATH2}"
                //MK_HOME = "${PATH2}"
 	             }
