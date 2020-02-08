@@ -40,8 +40,9 @@ pipeline {
 	             CUR_DIR_VAR = "${WORKSPACE}"
 	             registry = "pstambaugh14/mern-auth-jenks-k8s2"
 	             dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
-               MK_HOME = "${PATH2}"
                PATH1 = "${PATH1}"
+               PATH2 = "${PATH2}"
+               MK_HOME = "${PATH2}"
                //MK_HOME = "${PATH2}"
 	             }
                  //stages {
