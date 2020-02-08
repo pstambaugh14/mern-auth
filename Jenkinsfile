@@ -24,7 +24,7 @@ pipeline {
       DEBUG_FLAGS = '-g'
       JENKINS_PATH = '$PWD'
       SHELL = "/bin/bash"
-      PATH = "${PATH}"
+      //PATH = "${PATH}"
       registry = 'pstambaugh14/mern-auth-jenks-k8s2'
       dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
       //PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
@@ -47,7 +47,7 @@ pipeline {
          environment {
             DEBUG_FLAGS = '-g'
             CUR_DIR_VAR = "${WORKSPACE}"
-            PATH = "${PATH}"
+            //PATH = "${PATH}"
           }
          agent { label 'master'}
          steps {
@@ -172,7 +172,7 @@ pipeline {
                DEBUG_FLAGS = '-g'
                CUR_DIR_VAR = "${WORKSPACE}"
                //PATH = '$PATH'
-               PATH = "${PATH}"
+               //PATH = "${PATH}"
             }
             agent { label 'master'}
             steps {
@@ -206,7 +206,7 @@ pipeline {
           environment {
              DEBUG_FLAGS = '-g'
              CUR_DIR_VAR = "${WORKSPACE}"
-             PATH = "${PATH}"
+             //PATH = "${PATH}"
              MK_HOME = "${PATH2}"
           }
           agent { label 'master'}
