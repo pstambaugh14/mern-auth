@@ -122,7 +122,8 @@ pipeline {
 //          }
 //   stages {
       stage('Checkout') {
-        steps {
+        node {
+          //steps {
         checkout scm }
 }
         stage('Initialize') {
