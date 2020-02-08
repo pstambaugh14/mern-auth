@@ -142,8 +142,9 @@ pipeline {
                  sh '"${WORKSPACE}"/mkpath.sh'
                  sh """#!/bin/bash
                        echo "{$path2}"
-                       sh "${path2}"/minikube service list | grep -i "${feSvcName}" | awk '{print "${6}"}' '!#/usr/share/groovy/ > "${feSvcName}"'
+                       sh $path2 service list | grep -i "${feSvcName}" | awk '{print "${6}"}'
                     """
+//                  '!#/usr/share/groovy > "${feSvcName}"'
 //                 sh 'chmod 0744 "${WORKSPACE}"/service-ip.sh'
 //                 sh 'sudo "${WORKSPACE}"/service-ip.sh'
              }
