@@ -44,17 +44,19 @@ pipeline {
        stage ('Preparation') {
          environment {
             DEBUG_FLAGS = '-g'
+            CUR_DIR_VAR = "${WORKSPACE}"
+            PATH = '$PATH'
          }
          agent { label 'master'}
          steps {
-               CUR_DIR_VAR = "${WORKSPACE}"
                echo 'Establishing Environment Variables..'
                sh 'printenv'
-               pathvar = sh 'printenv |grep -i path'
-               echo "${pathvar}"
+               echo '$PATH'
+               //pathvar = sh 'printenv |grep -i path'
+               //echo "${pathvar}"
                echo "Hello world"
-               echo "PATH=${JENKINS_PATH}"
-               sh 'echo "JP=$JENKINS_PATH"'
+               //echo '$PATH'=PATH
+               //sh 'echo "JP=$JENKINS_PATH"'
                echo "${WORKSPACE}"
                //sh 'PATH1=`whereis minikube`'
 //               sh """#!/bin/bash
@@ -161,16 +163,24 @@ pipeline {
 //          }
 //        }
         stage('Deploy Application') {
-          environment {
-             DEBUG_FLAGS = '-g'
-          }
-          agent { label 'master'}
-          steps {
-                CUR_DIR_VAR = "${WORKSPACE}"
-                echo 'Establishing Environment Variables..'
-                sh 'printenv'
-                pathvar = sh 'printenv |grep -i path'
-              }
+            environment {
+               DEBUG_FLAGS = '-g'
+               CUR_DIR_VAR = "${WORKSPACE}"
+               PATH = '$PATH'
+            }
+            agent { label 'master'}
+            steps {
+                  echo 'Establishing Environment Variables..'
+                  sh 'printenv'
+                  echo '$PATH'
+                  //echo '$PATH'
+                  //pathvar = sh 'printenv |grep -i path'
+                  //echo "${pathvar}"
+                  //echo "Hello world"
+                  //echo '$PATH'=PATH
+                  //sh 'echo "JP=$JENKINS_PATH"'
+                  echo "${WORKSPACE}"
+                }
           steps {
              sh 'chmod 0744 "${WORKSPACE}"/pod-check.sh'
 	           sh '"${WORKSPACE}"/pod-check.sh'
@@ -190,14 +200,14 @@ pipeline {
         stage('List mern-auth Service IP and Port for Access') {
           environment {
              DEBUG_FLAGS = '-g'
+             CUR_DIR_VAR = "${WORKSPACE}"
           }
           agent { label 'master'}
           steps {
-                CUR_DIR_VAR = "${WORKSPACE}"
                 echo 'Establishing Environment Variables..'
                 sh 'printenv'
-                pathvar = sh 'printenv |grep -i path'
-              }
+                echo '$PATH'
+                }
              node {
                steps {
                  sh """#!/bin/bash
