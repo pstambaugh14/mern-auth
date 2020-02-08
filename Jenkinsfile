@@ -181,7 +181,6 @@ pipeline {
                   //sh 'echo "JP=$JENKINS_PATH"'
                   echo "${WORKSPACE}"
                 }
-          steps {
              sh 'chmod 0744 "${WORKSPACE}"/pod-check.sh'
 	           sh '"${WORKSPACE}"/pod-check.sh'
              sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")
@@ -195,7 +194,6 @@ pipeline {
              //sh("minikube service list | grep -i ${feSvcName} | awk '{ print $6 }' > ${feSvcName}")
              //sh 'printenv'
        }
-    }
 
         stage('List mern-auth Service IP and Port for Access') {
           environment {
@@ -208,8 +206,8 @@ pipeline {
                 sh 'printenv'
                 echo '$PATH'
                 }
-             node {
-               steps {
+             //node {
+               //steps {
                  sh """#!/bin/bash
                  PATH2 =`echo "{$PATH1}" | awk '{ print \$2 }' | sed 's/minikube//g'`
                  """
@@ -233,8 +231,8 @@ pipeline {
                  //echo USERNAME
                  //sh ("${path2} service list | grep -i ${feSvcName} | awk '{ print "${6}" }'")
                  //"""
-             }
-           }
+             //}
+           //}
 
              //withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                // available as an env variable, but will be masked if you try to print it out any which way
@@ -255,7 +253,7 @@ pipeline {
 //            sh "docker rmi $registry:$BUILD_NUMBER"
 //          }
 //      }
- }
+}
 // IF DESIRED: CLEAN WORKSPACE AFTER BUILD ALSO
 //        post {
 //          always {
