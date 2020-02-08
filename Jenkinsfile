@@ -18,7 +18,20 @@ def feSvcName = "mern-auth-service"
 //def = "ClientCertPath"="/home/patrick/.minikube/certs/cert.pem"
 
 pipeline {
-  agent any
+  agent {
+    any
+  }
+  environment {
+      JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
+      SHELL = '/bin/bash'
+      PATH = '$PATH'
+      registry = "pstambaugh14/mern-auth-jenks-k8s2"
+      dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
+      PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
+      sh """#!/bin/bash
+      PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
+      """`
+    }
    //agent none
     //stages {
         //stage('Example') {
@@ -35,12 +48,34 @@ pipeline {
    stages {
        stage ('Preparation') {
          agent { label 'master'}
-           environment {
-               //JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
+         steps {
                CUR_DIR_VAR = "${WORKSPACE}"
-	             registry = "pstambaugh14/mern-auth-jenks-k8s2"
-	             dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
-               PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
+               echo 'Establishing Environment Variables..'
+               pathvar = sh 'printenv |grep -i path'
+               echo "${pathvar}"
+               //echo "Hello world"
+               //echo "PATH=${JENKINS_PATH}"
+               //sh 'echo "JP=$JENKINS_PATH"'
+               //echo "${WORKSPACE}"
+               //sh 'PATH1=`whereis minikube`'
+//               sh """#!/bin/bash
+//               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
+//               """`
+               //echo "${$PATH2}"
+	     }
+  }
+//           environment {
+//               //JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
+//               SHELL = '/bin/bash'
+//               PATH = '$PATH'
+//               CUR_DIR_VAR = "${WORKSPACE}"
+//	             registry = "pstambaugh14/mern-auth-jenks-k8s2"
+//	             dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
+//               PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
+//               sh """#!/bin/bash
+//               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
+//               """`
+
                //PATH2 = sh(script: '`echo "$PATH1" | awk '{ print "${2}" }' | sed 's/minikube//g'`', , returnStdout: true).trim()
         //       PATH2 = "$PATH15"
                //sh """#!/bin/bash
@@ -48,26 +83,11 @@ pipeline {
                //"""
                //PATH2 = "$PATH2"
                //sh 'PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`'
-               MK_HOME = "${PATH2}"
                //MK_HOME = "${PATH2}"
 	             }
                  //stages {
                  //stage ('Preparation') {
-	       steps {
-               echo 'Establishing Environment Variables..'
-               pathvar= sh 'printenv |grep -i path'
-               echo "${pathvar}"
-               //echo "Hello world"
-               //echo "PATH=${JENKINS_PATH}"
-               //sh 'echo "JP=$JENKINS_PATH"'
-               //echo "${WORKSPACE}"
-               //sh 'PATH1=`whereis minikube`'
-               sh """#!/bin/bash
-               PATH2=`echo $PATH1 | awk '{ print \$2 }' | sed 's/minikube//g'`
-               """
-               //echo "${$PATH2}"
-	     }
-  }
+
 //   stages {
 //        stage('first') {
 //                agent { label 'master' }
@@ -155,15 +175,20 @@ pipeline {
              //Grab the internal IP address of the service if using Minikube
              //sh("minikube service list | grep -i ${feSvcName} | awk '{ print $6 }' > ${feSvcName}")
              //sh 'printenv'
-             withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+       }
+    }
+
+        stage('List mern-auth Service IP and Port for Access') {
+             node {
+               steps {
+               withEnv(['MK_HOME=${PATH2}']) {
+               MK_HOME = "${PATH2}"
+                 withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
 
              sh """#!/bin/bash
              '"${MK_HOME}"/minikube service list | grep -i "${feSvcName}" | awk '{ print "\$6" }'  > "${feSvcName}"'
              """
              // some block
-          //node {
-           //withEnv(['MK_HOME=${PATH2}']) {
-         //MK_HOME = "${PATH2}"
                     //}
                   //}
                  //sh 'chmod 0744 ${WORKSPACE}/mkpath.sh'
@@ -188,9 +213,9 @@ pipeline {
                //echo USERNAME
                // or inside double quotes for string interpolation
                //echo "username is $USERNAME"
-             //}
+          }   //}
 
-
+         }
              //sh 'minikube service list | grep -i "${feSvcName}" | awk '{ print "$6" }' > "${feSvcName}"'
       }
   }
