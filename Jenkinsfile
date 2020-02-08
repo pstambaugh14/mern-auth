@@ -214,6 +214,8 @@ pipeline {
                 echo 'Establishing Environment Variables..'
                 sh 'printenv'
                 echo '$PATH'
+                echo "$PATH"
+                echo "${PATH}"
              //node {
                //steps {
                  //PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
@@ -223,11 +225,13 @@ pipeline {
                  //"""
                  sh('"${WORKSPACE}"/mkpath.sh')
                withEnv(['MK_HOME=${MINI2}']) {
-                 withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                 withCredentials([usernamePassword(credentialsId: '609ae012-c8a0-4d24-a667-1875d98939dc', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                     // some block
+                     sh('"${WORKSPACE}"/service-ip.sh')
+//                 withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
 //                   sh """#!/bin/bash
 //                   '"${MK_HOME}"/minikube service list | grep -i "${feSvcName}" | awk '{ print "\$6" }'  > "${feSvcName}"'
 //                   """
-                  sh('"${WORKSPACE}"/service-ip.sh')
                  }
              // some block
                     //}
