@@ -25,7 +25,7 @@ pipeline {
       PATH = '$PATH'
       registry = "pstambaugh14/mern-auth-jenks-k8s2"
       dockerImage = 'pstambaugh14/mern-auth-jenks-k8s2'
-      PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
+      //PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
     }
    //agent none
     //stages {
@@ -209,7 +209,9 @@ pipeline {
                 echo '$PATH'
              //node {
                //steps {
+                 //PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
                  sh """#!/bin/bash
+                 PATH1 = `'whereis minikube'`
                  PATH2 =`echo "{$PATH1}" | awk '{ print \$2 }' | sed 's/minikube//g'`
                  """
                withEnv(['MK_HOME=${PATH2}']) {
