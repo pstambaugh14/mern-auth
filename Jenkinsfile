@@ -136,10 +136,10 @@ pipeline {
              //Grab the internal IP address of the service if using Minikube
              //sh("minikube service list | grep -i ${feSvcName} | awk '{ print $6 }' > ${feSvcName}")
              //sh 'printenv'
-             withCredentials([usernamePassword(credentialsId: 'b6c92daa-6ab1-40ce-8f20-3cdbb19cb341', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+             withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                  // some block
-               sh 'chmod 0744 "${WORKSPACE}"/service-ip.sh'
-               sh '"${WORKSPACE}"/service-ip.sh'
+                 sh 'chmod 0744 "${WORKSPACE}"/service-ip.sh'
+                 sh 'sudo "${WORKSPACE}"/service-ip.sh'
              }
              //sh 'minikube service list | grep -i "${feSvcName}" | awk '{ print "$6" }' > "${feSvcName}"'
       }
