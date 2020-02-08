@@ -145,11 +145,12 @@ pipeline {
              //sh 'printenv'
              withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                  // some block
-              node {
-               withEnv(['MK_HOME=${PATH2}']) {
-                 sh '$MK_HOME/minikube service list | grep -i "${feSvcName}" | awk '{ print $6 }'  > "${feSvcName}"'
-                    }
-                  }
+              //node {
+               //withEnv(['MK_HOME=${PATH2}']) {
+             MK_HOME = "${PATH2}"
+             sh '$MK_HOME/minikube service list | grep -i "${feSvcName}" | awk '{ print $6 }'  > "${feSvcName}"'
+                    //}
+                  //}
                  //sh 'chmod 0744 ${WORKSPACE}/mkpath.sh'
                  //sh '${WORKSPACE}/mkpath.sh'
                  //sh """#!/bin/bash
