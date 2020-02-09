@@ -22,7 +22,7 @@ pipeline {
   environment {
 //      JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
       //DEBUG_FLAGS = '-g'
-      JENKINS_PATH = "${PWD}"
+      //JENKINS_PATH = "${PWD}"
       //SHELL = "/bin/bash"
       //PATH = "${PATH}"
       registry = 'pstambaugh14/mern-auth-jenks-k8s2'
@@ -44,11 +44,11 @@ pipeline {
 //		}
    stages {
        stage ('Preparation') {
-         environment {
-            DEBUG_FLAGS = '-g'
-            CUR_DIR_VAR = "${WORKSPACE}"
-            PATH = "${PATH}"
-          }
+         //environment {
+            //DEBUG_FLAGS = '-g'
+            //CUR_DIR_VAR = "${WORKSPACE}"
+            //PATH = "${PATH}"
+          //}
          agent { label 'master'}
          steps {
                echo 'Establishing Environment Variables..'
@@ -168,12 +168,12 @@ pipeline {
 //          }
 //        }
         stage ('Deploy Application') {
-            environment {
-               DEBUG_FLAGS = '-g'
-               CUR_DIR_VAR = "${WORKSPACE}"
+            //environment {
+               //DEBUG_FLAGS = '-g'
+               //CUR_DIR_VAR = "${WORKSPACE}"
                //PATH = '$PATH'
                //PATH = "${PATH}"
-            }
+            //}
             agent { label 'master'}
             steps {
                   echo 'Establishing Environment Variables..'
@@ -203,12 +203,12 @@ pipeline {
        }
 }
         stage ('List mern-auth Service IP and Port for Access') {
-          environment {
-             DEBUG_FLAGS = '-g'
-             CUR_DIR_VAR = "${WORKSPACE}"
+          //environment {
+             //DEBUG_FLAGS = '-g'
+             //CUR_DIR_VAR = "${WORKSPACE}"
              //PATH = "${PATH}"
              //MK_HOME = "${MINI2}"
-          }
+          //}
           agent { label 'master'}
           steps {
                 echo 'Establishing Environment Variables..'
