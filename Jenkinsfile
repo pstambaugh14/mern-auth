@@ -265,7 +265,9 @@ pipeline {
          //}
              //sh 'minikube service list | grep -i "${feSvcName}" | awk '{ print "$6" }' > "${feSvcName}"'
       }
+    }
   }
+}
 //        stage('Remove Unused docker image') {
 //          steps{
 //            sh "docker rmi $registry:$BUILD_NUMBER"
@@ -278,5 +280,5 @@ pipeline {
             cleanWs()
     	}
     }
-  )
-}
+//  )
+//}
