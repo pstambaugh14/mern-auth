@@ -1,4 +1,4 @@
-//#!/usr/share/groovy
+#!/usr/share/groovy
 // Declarative Pipeline
 def project = 'mern-auth'
 def appName = 'mern-auth'
