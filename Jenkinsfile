@@ -273,8 +273,8 @@ pipeline {
 //      }
 //}
 // IF DESIRED: CLEAN WORKSPACE AFTER BUILD ALSO
-//        post {
-//          always {
-//            cleanWs()
+        post {
+          always {
+            cleanWs()
     	}
     }
