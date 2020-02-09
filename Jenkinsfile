@@ -44,11 +44,11 @@ pipeline {
 //		}
    stages {
        stage ('Preparation') {
-         //environment {
-            //DEBUG_FLAGS = '-g'
+         environment {
+            DEBUG_FLAGS = '-g'
             //CUR_DIR_VAR = "${WORKSPACE}"
             //PATH = "${PATH}"
-          //}
+          }
          agent { label 'master'}
          steps {
                echo 'Establishing Environment Variables..'
