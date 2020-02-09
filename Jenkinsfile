@@ -21,7 +21,7 @@ pipeline {
   agent any
   environment {
 //      JENKINS_PATH = sh(script: 'pwd', , returnStdout: true).trim()
-      DEBUG_FLAGS = '-g'
+      //DEBUG_FLAGS = '-g'
       //JENKINS_PATH = '$PWD'
       //SHELL = "/bin/bash"
       //PATH = "${PATH}"
@@ -45,7 +45,7 @@ pipeline {
    stages {
        stage ('Preparation') {
          environment {
-            //DEBUG_FLAGS = '-g'
+            DEBUG_FLAGS = '-g'
             CUR_DIR_VAR = "${WORKSPACE}"
             //PATH = "${PATH}"
           }
@@ -169,8 +169,8 @@ pipeline {
 //        }
         stage ('Deploy Application') {
             environment {
-               //DEBUG_FLAGS = '-g'
-               //CUR_DIR_VAR = "${WORKSPACE}"
+               DEBUG_FLAGS = '-g'
+               CUR_DIR_VAR = "${WORKSPACE}"
                //PATH = '$PATH'
                //PATH = "${PATH}"
             }
@@ -203,12 +203,12 @@ pipeline {
        }
 }
         stage ('List mern-auth Service IP and Port for Access') {
-          //environment {
-             //DEBUG_FLAGS = '-g'
+          environment {
+             DEBUG_FLAGS = '-g'
              CUR_DIR_VAR = "${WORKSPACE}"
              //PATH = "${PATH}"
              //MK_HOME = "${MINI2}"
-          //}
+          }
           agent { label 'master'}
           steps {
                 echo 'Establishing Environment Variables..'
