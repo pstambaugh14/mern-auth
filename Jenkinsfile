@@ -170,7 +170,7 @@ pipeline {
         stage ('Deploy Application') {
             environment {
                //DEBUG_FLAGS = '-g'
-               CUR_DIR_VAR = "${WORKSPACE}"
+               //CUR_DIR_VAR = "${WORKSPACE}"
                //PATH = '$PATH'
                //PATH = "${PATH}"
             }
@@ -203,19 +203,19 @@ pipeline {
        }
 }
         stage ('List mern-auth Service IP and Port for Access') {
-          environment {
+          //environment {
              //DEBUG_FLAGS = '-g'
              CUR_DIR_VAR = "${WORKSPACE}"
              //PATH = "${PATH}"
              //MK_HOME = "${MINI2}"
-          }
+          //}
           agent { label 'master'}
           steps {
                 echo 'Establishing Environment Variables..'
                 sh 'printenv'
-                echo '$PATH'
-                echo "$PATH"
-                echo "${PATH}"
+                //echo '$PATH'
+                //echo "$PATH"
+                //echo "${PATH}"
              //node {
                //steps {
                  //PATH1 = sh(script: '`whereis minikube`', , returnStdout: true).trim()
@@ -228,7 +228,7 @@ pipeline {
 //                 withCredentials([usernamePassword(credentialsId: '609ae012-c8a0-4d24-a667-1875d98939dc', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                      // some block
                      //sh('"${WORKSPACE}"/service-ip.sh')
-                  sh 'service-ip.sh'
+                  sh "${WORKSPACE}"/service-ip.sh
 //                 withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
 //                   sh """#!/bin/bash
 //                   '"${MK_HOME}"/minikube service list | grep -i "${feSvcName}" | awk '{ print "\$6" }'  > "${feSvcName}"'
