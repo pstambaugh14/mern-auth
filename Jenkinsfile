@@ -168,12 +168,12 @@ pipeline {
 //          }
 //        }
         stage ('Deploy Application') {
-            //environment {
-               //DEBUG_FLAGS = '-g'
+            environment {
+               DEBUG_FLAGS = '-g'
                //CUR_DIR_VAR = "${WORKSPACE}"
                //PATH = '$PATH'
                //PATH = "${PATH}"
-            //}
+            }
             agent { label 'master'}
             steps {
                   echo 'Establishing Environment Variables..'
@@ -203,16 +203,16 @@ pipeline {
        }
 }
         stage ('List mern-auth Service IP and Port for Access') {
-          //environment {
-             //DEBUG_FLAGS = '-g'
+          environment {
+             DEBUG_FLAGS = '-g'
              //CUR_DIR_VAR = "${WORKSPACE}"
              //PATH = "${PATH}"
              //MK_HOME = "${MINI2}"
-          //}
+          }
           agent { label 'master'}
           steps {
-                echo 'Establishing Environment Variables..'
-                sh 'printenv'
+                //echo 'Establishing Environment Variables..'
+                //sh 'printenv'
                 //echo '$PATH'
                 //echo "$PATH"
                 //echo "${PATH}"
@@ -228,7 +228,7 @@ pipeline {
 //                 withCredentials([usernamePassword(credentialsId: '609ae012-c8a0-4d24-a667-1875d98939dc', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                      // some block
                      //sh('"${WORKSPACE}"/service-ip.sh')
-                  sh "${WORKSPACE}"/service-ip.sh
+                  //sh "${WORKSPACE}"/service-ip.sh
 //                 withCredentials([usernamePassword(credentialsId: 'ddc3a64c-7949-4126-b363-7a4f5a9eae90', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
 //                   sh """#!/bin/bash
 //                   '"${MK_HOME}"/minikube service list | grep -i "${feSvcName}" | awk '{ print "\$6" }'  > "${feSvcName}"'
@@ -259,9 +259,9 @@ pipeline {
                //echo USERNAME
                // or inside double quotes for string interpolation
                //echo "username is $USERNAME"
-          }   //}
+          //}   //}
 
-         }
+         //}
              //sh 'minikube service list | grep -i "${feSvcName}" | awk '{ print "$6" }' > "${feSvcName}"'
       }
   }
@@ -275,5 +275,5 @@ pipeline {
 //        post {
 //          always {
 //            cleanWs()
-//    	}
-//    }
+    	}
+    }
