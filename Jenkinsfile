@@ -270,7 +270,7 @@ pipeline {
 //            sh "docker rmi $registry:$BUILD_NUMBER"
 //          }
 //      }
-}
+//}
 // IF DESIRED: CLEAN WORKSPACE AFTER BUILD ALSO
 //        post {
 //          always {
