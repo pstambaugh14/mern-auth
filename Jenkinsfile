@@ -244,7 +244,8 @@ pipeline {
                  //sh 'echo $PATH2'
                  //export PATH2=$PATH2
                  //sh 'chmod 0744 ${WORKSPACE}/service-ip.sh'
-                 //sh '${WORKSPACE}/service-ip.sh'
+                 sh '${WORKSPACE}/service-ip.sh'
+                 echo "this is stoppid"
                  //echo USERNAME
                  //sh ("${path2} service list | grep -i ${feSvcName} | awk '{ print "${6}" }'")
                  //"""
