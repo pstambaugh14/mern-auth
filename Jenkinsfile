@@ -187,7 +187,7 @@ pipeline {
                   //echo '$PATH'=PATH
                   //sh 'echo "JP=$JENKINS_PATH"'
                   echo "${WORKSPACE}"
-
+             sh 'whoami && id && w'
              sh 'chmod 0744 "${WORKSPACE}"/pod-check.sh'
 	           sh '"${WORKSPACE}"/pod-check.sh'
              sh("kubectl get ns ${namespace} || kubectl create ns ${namespace}")
