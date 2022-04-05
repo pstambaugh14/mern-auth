@@ -1,0 +1,23 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: backstage
+  description: |
+    Patrick mern-auth TEST
+  links:
+    - title: mern-auth TEST
+      url: https://github.com/pstambaugh14/mern-auth/
+    - title: Documentation
+      url: https://github.com/pstambaugh14/mern-auth//README.MD
+    - title: Storybook
+      url: still to come...
+    - title: Discord Chat
+      url: still to come...
+  annotations:
+    github.com/project-slug: pstambaugh14/mern-auth
+    backstage.io/techdocs-ref: dir:.
+    lighthouse.com/website-url: https://backstage.io
+spec:
+  type: library
+  owner: CNCF
+  lifecycle: experimental
